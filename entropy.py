@@ -1,3 +1,7 @@
+""" implementation of Entropy
+Author: Jingchao Yang
+Date: Apr.1 2018
+"""
 from math import log
 
 def calcShannonEnt(dataSet):

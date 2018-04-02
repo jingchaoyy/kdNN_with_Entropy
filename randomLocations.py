@@ -31,7 +31,7 @@ def genPoints(numPs):
     return points
 
 
-print("Random points", genPoints(10))
+# print("Random points", genPoints(100))
 
 
 """ generate random world point geometries
