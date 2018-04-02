@@ -32,15 +32,15 @@ def genPoints(numPs):
 # ps = genPoints(5)
 # print(ps)
 
-pointColor = ['red', 'yellow', 'blue', 'black', 'white']
+foodType = ['Chinese', 'Japanese', 'American', 'Mexican', 'German']
 # output food type accordingly, one point match with one food type
-def pColor(points):
-    PCs = []
+def fType(points):
+    FTs = []
     for p in points:
-        PC = random.choice(pointColor)
-        PCs.append(PC)
+        FT = random.choice(foodType)
+        FTs.append(FT)
 
-    return PCs
+    return FTs
 
 # print(assiPT(ps))
 

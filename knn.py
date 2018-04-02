@@ -17,31 +17,31 @@ def knn(p):
 """ Function defined to output all neighbors with 
 assigned point colors for input point latlon
 """
-def assignColor(pLatLon, pS, pCs, nbors):
+def assignFT(pLatLon, pS, fTs, nbors):
     # check if point exits
     if pLatLon in pS:
         # find the point location
         pLocation = pS.index(pLatLon)
-        # getting all the neighbors
+        # getting all the point neighbors
         pNeighbors = nbors[pLocation]
         neighborTypes = []
         # assign each neighbor with their color type
         for n in pNeighbors:
-            neighborTypes.append(pCs[n])
+            neighborTypes.append(fTs[n])
         return neighborTypes
     else:
         print("Point not found")
 
 if __name__ == "__main__":
     # generating 100 points randomly
-    pSets = randomLocations.genPoints(5)
+    pSets = randomLocations.genPoints(10)
     print(pSets)
-    pColors = randomLocations.pColor(pSets)
-    print(pColors)
+    fTypes = randomLocations.fType(pSets)
+    print(fTypes)
 
     # calculating knn for each point
     neighbors = knn(pSets)[1]
     print(neighbors)
     # e.g. find all neighbors with types for the first point
     p0 = 0
-    print(assignColor(pSets[p0],pSets,pColors,neighbors))
+    print(assignFT(pSets[p0],pSets,fTypes,neighbors))
