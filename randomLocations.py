@@ -27,11 +27,23 @@ def genPoints(numPs):
         point.append(y)
         points.append(point)
 
-
     return points
 
+# ps = genPoints(5)
+# print(ps)
 
-# print("Random points", genPoints(100))
+pointColor = ['red', 'yellow', 'blue', 'black', 'white']
+# output food type accordingly, one point match with one food type
+def pColor(points):
+    PCs = []
+    for p in points:
+        PC = random.choice(pointColor)
+        PCs.append(PC)
+
+    return PCs
+
+# print(assiPT(ps))
+
 
 
 """ generate random world point geometries
