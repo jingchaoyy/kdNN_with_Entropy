@@ -7,7 +7,6 @@ import numpy as np
 import randomLocations
 
 # simple knn
-
 def knn(p):
     X = np.array(p)
     nbrs = NearestNeighbors(n_neighbors=len(X), algorithm='ball_tree').fit(X)
@@ -18,30 +17,31 @@ def knn(p):
 """ Function defined to output all neighbors with 
 assigned point colors for input point latlon
 """
-def assignColor(pLatLon, neighbors):
+def assignColor(pLatLon, pS, pCs, nbors):
     # check if point exits
-    if pLatLon in points:
+    if pLatLon in pS:
         # find the point location
-        pLocation = points.index(pLatLon)
+        pLocation = pS.index(pLatLon)
         # getting all the neighbors
-        pNeighbors = neighbors[pLocation]
+        pNeighbors = nbors[pLocation]
         neighborTypes = []
         # assign each neighbor with their color type
         for n in pNeighbors:
-            neighborTypes.append(pTypes[n])
+            neighborTypes.append(pCs[n])
         return neighborTypes
     else:
         print("Point not found")
 
 if __name__ == "__main__":
     # generating 100 points randomly
-    points = randomLocations.genPoints(5)
-    print(points)
-    pTypes = randomLocations.pColor(points)
-    print(pTypes)
+    pSets = randomLocations.genPoints(5)
+    print(pSets)
+    pColors = randomLocations.pColor(pSets)
+    print(pColors)
 
     # calculating knn for each point
-    neighbors = knn(points)[1]
+    neighbors = knn(pSets)[1]
     print(neighbors)
     # e.g. find all neighbors with types for the first point
-    print(assignColor(points[0],neighbors))
+    p0 = 0
+    print(assignColor(pSets[p0],pSets,pColors,neighbors))
