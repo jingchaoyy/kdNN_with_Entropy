@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b990643d-2575-474b-8379-68d8a7dfa0b0" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/knn.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/entropy.py" afterPath="$PROJECT_DIR$/entropy.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/randomLocations.py" afterPath="$PROJECT_DIR$/randomLocations.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,11 +17,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="randomLocations.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="randomLocations.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/randomLocations.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="33" column="20" lean-forward="false" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="3" />
               <folding>
                 <element signature="e#96#109#0" expanded="true" />
               </folding>
@@ -30,9 +32,21 @@
       <file leaf-file-name="entropy.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/entropy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="39" column="29" lean-forward="false" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+            <state relative-caret-position="0">
+              <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="knn.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/knn.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="34" lean-forward="true" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="34" />
+              <folding>
+                <element signature="e#78#124#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -52,8 +66,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/entropy.py" />
         <option value="$PROJECT_DIR$/randomLocations.py" />
+        <option value="$PROJECT_DIR$/knn.py" />
+        <option value="$PROJECT_DIR$/entropy.py" />
       </list>
     </option>
   </component>
@@ -114,7 +129,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.randomLocations">
+  <component name="RunManager" selected="Python.knn">
     <configuration default="false" name="entropy" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -146,6 +161,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="kdNN_with_Entropy" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/randomLocations.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="knn" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="kdNN_with_Entropy" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/knn.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -215,14 +248,16 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
-    <list size="2">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Python.entropy" />
       <item index="1" class="java.lang.String" itemvalue="Python.randomLocations" />
+      <item index="2" class="java.lang.String" itemvalue="Python.knn" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Python.randomLocations" />
-        <item index="1" class="java.lang.String" itemvalue="Python.entropy" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Python.knn" />
+        <item index="1" class="java.lang.String" itemvalue="Python.randomLocations" />
+        <item index="2" class="java.lang.String" itemvalue="Python.entropy" />
       </list>
     </recent_temporary>
   </component>
@@ -271,20 +306,38 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/entropy.py">
+    <entry file="file://$PROJECT_DIR$/randomLocations.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="39" column="29" lean-forward="false" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="3" />
+          <folding>
+            <element signature="e#96#109#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sklearn/neighbors/approximate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="506" column="64" lean-forward="false" selection-start-line="506" selection-start-column="48" selection-end-line="506" selection-end-column="64" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/randomLocations.py">
+    <entry file="file://$PROJECT_DIR$/entropy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="33" column="20" lean-forward="false" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
+        <state relative-caret-position="0">
+          <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/knn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="34" lean-forward="true" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="34" />
           <folding>
-            <element signature="e#96#109#0" expanded="true" />
+            <element signature="e#78#124#0" expanded="true" />
           </folding>
         </state>
       </provider>
