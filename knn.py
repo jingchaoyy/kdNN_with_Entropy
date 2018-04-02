@@ -18,11 +18,15 @@ def knn(p):
 """ Function defined to output all neighbors with 
 assigned point colors for input point latlon
 """
-def typeRanks(pLatLon, neighbors):
+def assignColor(pLatLon, neighbors):
+    # check if point exits
     if pLatLon in points:
+        # find the point location
         pLocation = points.index(pLatLon)
+        # getting all the neighbors
         pNeighbors = neighbors[pLocation]
         neighborTypes = []
+        # assign each neighbor with their color type
         for n in pNeighbors:
             neighborTypes.append(pTypes[n])
         return neighborTypes
@@ -40,4 +44,4 @@ if __name__ == "__main__":
     neighbors = knn(points)[1]
     print(neighbors)
     # e.g. find all neighbors with types for the first point
-    print(typeRanks(points[0],neighbors))
+    print(assignColor(points[0],neighbors))
