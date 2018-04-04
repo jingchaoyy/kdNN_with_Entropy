@@ -24,24 +24,24 @@ def calcShannonEnt(dataSet):
 
     return shannonEnt
 
-dataSet1 = ['Chinese','Chinese']
-dataSet2 = ['Chinese', 'Japanese']
-dataSet3 = ['Chinese', 'Japanese', 'American']
-
-############ entropy for base set ##############
-dataSet4 = ['Chinese', 'Japanese', 'Italian', 'American']
-
-############ entropy after enlarge set data ##############
-dataSet5 = ['Chinese', 'Chinese', 'Japanese', 'Italian', 'American']
-dataSet6 = ['Chinese', 'Japanese', 'Japanese', 'Italian', 'American']
-dataSet7 = ['Chinese', 'Japanese', 'Italian', 'Italian', 'American']
-dataSet8 = ['Chinese', 'Japanese', 'Italian', 'American', 'American']
-# dataSet9 = [['Chinese'], ['Japanese'], ['Italian'], ['American'],['Chinese'], ['Japanes'], ['Italia'], ['America']]
-
-data = [dataSet1,dataSet2,dataSet3,dataSet4,dataSet5,dataSet6,dataSet7,dataSet8]
-
-for d in data:
-    print (calcShannonEnt(d))
+# dataSet1 = ['Chinese','Chinese']
+# dataSet2 = ['Chinese', 'Japanese']
+# dataSet3 = ['Chinese', 'Japanese', 'American']
+#
+# ############ entropy for base set ##############
+# dataSet4 = ['Chinese', 'Japanese', 'Italian', 'American']
+#
+# ############ entropy after enlarge set data ##############
+# dataSet5 = ['Chinese', 'Chinese', 'Japanese', 'Italian', 'American']
+# dataSet6 = ['Chinese', 'Japanese', 'Japanese', 'Italian', 'American']
+# dataSet7 = ['Chinese', 'Japanese', 'Italian', 'Italian', 'American']
+# dataSet8 = ['Chinese', 'Japanese', 'Italian', 'American', 'American']
+# # dataSet9 = [['Chinese'], ['Japanese'], ['Italian'], ['American'],['Chinese'], ['Japanes'], ['Italia'], ['America']]
+#
+# data = [dataSet1,dataSet2,dataSet3,dataSet4,dataSet5,dataSet6,dataSet7,dataSet8]
+#
+# for d in data:
+#     print (calcShannonEnt(d))
 
 # due to Chinese food are more similar to Japanese food than Italian to American
 # print '############ with weight ##############'
