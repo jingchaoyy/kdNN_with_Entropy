@@ -13,6 +13,12 @@ import entropy
 
 def knn(pS, fTs, pLatLon, k):
     X = np.array(pS)
+    nbrsO = NearestNeighbors(n_neighbors=len(X), algorithm='ball_tree').fit(X)
+    # return distances and ranked neighbors (presented as point location in array points)
+    distancesO, neighborsO = nbrsO.kneighbors(X)
+    nbrTysO = assignColor(pLatLon, pS, fTs, neighborsO)
+    print("Origenal Neighbor Ranking: ", nbrTysO)
+
     diversities = []  # storing diversity each time adding a new neighbor
     kNNs = []
     neighborsAfter = []
@@ -23,6 +29,7 @@ def knn(pS, fTs, pLatLon, k):
             # return distances and ranked neighbors (presented as point location in array points)
             distances, neighbors = nbrs.kneighbors(X)
             nbrTys = assignColor(pLatLon, pS, fTs, neighbors)
+            nbrTys = neighborsAfter + nbrTys[len(nbrTys)-1:len(nbrTys)]
             print('\nOriginal',nbrTys)
             diversity = entropy.calcShannonEnt(nbrTys)
             # print(diversity)
@@ -30,8 +37,10 @@ def knn(pS, fTs, pLatLon, k):
             kNNs.append(nbrTys)
             if len(kNNs) > 2:
                 neighborsAfter = checkNeighbor(nbrTys)
+            else:
+                neighborsAfter = nbrTys
 
-    return neighbors, nbrTys
+    return neighborsAfter
 
 
 """ Function defined to output all neighbors with 
