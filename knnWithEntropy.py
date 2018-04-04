@@ -6,19 +6,29 @@ Date: Apr.2 2018
 from sklearn.neighbors import NearestNeighbors
 import numpy as np
 import randomLocations
+import knn
 import entropy
 
 # simple knn
 
-def knn(pS, fT, pLatLon, k):
+def knn(pS, fTs, pLatLon, k):
     X = np.array(pS)
-    for i in range(k+1):
-        if i > 0:
+    diversities = []  # storing diversity each time adding a new neighbor
+    # looking for knn one by one
+    for i in range(len(pS)+1):
+        if i > 0:  # at least one nearest neighbor (i.e. itself)
             nbrs = NearestNeighbors(n_neighbors=i, algorithm='ball_tree').fit(X)
-            # return distances and ranked neighbors (presented as point location in array points
+            # return distances and ranked neighbors (presented as point location in array points)
             distances, neighbors = nbrs.kneighbors(X)
-            nTypes = assignColor(pLatLon, pS, fT, neighbors)
+            nTypes = assignColor(pLatLon, pS, fTs, neighbors)
+            print(nTypes)
+            diversity = entropy.calcShannonEnt(nTypes)
+            print(diversity)
+            diversities.append(diversity)
+            
 
+
+    print(diversities)
 
 
 
@@ -48,14 +58,14 @@ def assignColor(pLatLon, pS, fT, nbors):
 if __name__ == "__main__":
     # generating 100 points randomly
     pSets = randomLocations.genPoints(10)
-    print(pSets)
+    # print(pSets)
     fTypes = randomLocations.fType(pSets)
-    print(fTypes)
+    # print(fTypes)
 
     # calculating knn for each point
     # e.g. find all neighbors with types for the first point
     p0 = 0
     k = 5
     neighborTypes = knn(pSets,fTypes,pSets[p0],k)
-    print(neighborTypes)
+    # print(neighborTypes)
 
