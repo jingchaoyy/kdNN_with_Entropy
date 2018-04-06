@@ -50,6 +50,31 @@ def knn(pS, fTs, pLatLon, k):
     return neighborsAfter
 
 
+def knnDiv(pS, fTs, pLatLon, k):
+    XDiv = np.array(pS)
+    pLocation = pS.index(pLatLon)  # location for the target point in the list
+    nborDiv = []
+    nbrsDiv = NearestNeighbors(n_neighbors=len(XDiv), algorithm='ball_tree').fit(XDiv)
+    # return distances and ranked neighbors (presented as point location in array points)
+    distances, neighbors = nbrsDiv.kneighbors(XDiv)
+    # retrieving neighbors for target point
+    targetPNbrs = neighbors[pLocation]
+    original = assignFT(fTs,targetPNbrs)
+    tuple = zip(targetPNbrs,original)
+    div, other = [], []
+    divType = []
+    for i in tuple:
+        if i[1] in divType:
+            other.append(i)
+        else:
+            div.append(i)
+            divType.append(i[1])
+    div = div + other
+    print('\n\n######################## Most Divers #################################')
+    for k in div:
+        print(k)
+    return div
+
 """ Function defined to output all neighbors with 
 assigned point colors for input point latlon
 """
@@ -95,8 +120,9 @@ if __name__ == "__main__":
     # e.g. find all neighbors with types for the first point
     p0 = 0
     k = 5
-    neighborTypes = knn(pSets, fTypes, pSets[p0], k)
-    # print(neighborTypes)
+    neighbors = knn(pSets, fTypes, pSets[p0], k)
+    neighborsDiv = knnDiv(pSets, fTypes, pSets[p0], k)
+    # print(neighbors)
 
 tEnd = time.time()
 print("\nTotal time: ", tEnd - tStart, "seconds")
