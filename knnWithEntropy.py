@@ -6,6 +6,9 @@ from sklearn.neighbors import NearestNeighbors
 import numpy as np
 import randomLocations
 import entropy
+import time
+
+tStart = time.time()
 
 # simple knn
 def knn(pS, fTs, pLatLon, k):
@@ -92,3 +95,6 @@ if __name__ == "__main__":
     k = 5
     neighborTypes = knn(pSets, fTypes, pSets[p0], k)
     # print(neighborTypes)
+
+tEnd = time.time()
+print("\nTotal time: ", tEnd - tStart, "seconds")

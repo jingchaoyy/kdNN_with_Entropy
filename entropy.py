@@ -13,7 +13,7 @@ def calcShannonEnt(dataSet):
             typeCounts[currentLabel] = 0
         typeCounts[currentLabel] += 1
 
-    print (typeCounts)
+    # print (typeCounts)
 
     shannonEnt = 0.0
 
