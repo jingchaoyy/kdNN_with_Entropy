@@ -19,7 +19,7 @@ The final result is a balance between high diversity and distance
 
 def knn(pS, fTs, pLatLon, k):
     X = np.array(pS)
-    pLocation = pS.index(pLatLon) # location for the target point in the list
+    pLocation = pS.index(pLatLon)  # location for the target point in the list
     neighborsAfter = []  # Storing neighbors after each time getting neighbor check and switched
     # looking for knn one by one
     for i in range(len(pS) + 1):
@@ -50,6 +50,11 @@ def knn(pS, fTs, pLatLon, k):
     return neighborsAfter
 
 
+""" To collect highest diversity combination first, 
+then add all the rest in a sequence based on distance only
+"""
+
+
 def knnDiv(pS, fTs, pLatLon, k):
     XDiv = np.array(pS)
     pLocation = pS.index(pLatLon)  # location for the target point in the list
@@ -59,8 +64,9 @@ def knnDiv(pS, fTs, pLatLon, k):
     distances, neighbors = nbrsDiv.kneighbors(XDiv)
     # retrieving neighbors for target point
     targetPNbrs = neighbors[pLocation]
-    original = assignFT(fTs,targetPNbrs)
-    tuple = zip(targetPNbrs,original)
+    nbrsDist = distances[pLocation]
+    original = assignFT(fTs, targetPNbrs)
+    tuple = zip(targetPNbrs, original, nbrsDist)
     div, other = [], []
     divType = []
     for i in tuple:
@@ -74,6 +80,7 @@ def knnDiv(pS, fTs, pLatLon, k):
     for k in div:
         print(k)
     return div
+
 
 """ Function defined to output all neighbors with 
 assigned point colors for input point latlon
@@ -111,7 +118,7 @@ def checkNeighbor(fTs, nbors):
 
 if __name__ == "__main__":
     # generating 100 points randomly
-    pSets = randomLocations.genPoints(10)
+    pSets = randomLocations.genPoints(100)
     # print(pSets)
     fTypes = randomLocations.fType(pSets)
     # print(fTypes)
