@@ -1,4 +1,4 @@
-""" knn ranked with Entropy
+""" knn ranked with Entropy (Improved version)
 Author: Jingchao Yang
 Date: Apr.17 2018
 """
@@ -12,8 +12,9 @@ tStart = time.time()
 
 """ Entropy enabled knn
 Algorithm will compute the diversity/ entropy each time when a new neighbor added
-and adjust the the sequence for the last two neighbor based on the entropy value 
-The final result is a balance between high diversity and distance
+and adjust the the sequence to compare all combinations in the list to have the max 
+entropy sets. In a way, it is always give the most diverse neighbor sets with lowest
+total distance
 """
 
 
@@ -36,7 +37,7 @@ def knn(pS, fTs, pLatLon, k):
 
             # when more than 2 neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list
-            if len(neighborsAfter) > 2:
+            if len(neighborsAfter) > k:
                 neighborsAfter = checkNeighbor(fTs, neighborsAfter)
                 print('Adjusted', assignFT(fTs, neighborsAfter))
             else:  # when less than 2 neighbors found, add to the neighbor list directly
@@ -72,15 +73,26 @@ def checkNeighbor(fTs, nbors):
     # assign food type to all the neighbors first
     knnT = assignFT(fTs, nbors)
     # calculating the diversity without the newly added neighbor
-    diversity1 = entropy.calcShannonEnt(knnT[:len(knnT) - 1])
-    # calculating the diversity if replace the last added neighbor with the newly added neighbor
-    diversity2 = entropy.calcShannonEnt(knnT[:len(knnT) - 2] + knnT[len(knnT) - 1:len(knnT)])
 
-    # switching the last two neighbors if adding the later added neighbor first can give a higher entropy
-    if diversity2 > diversity1:
-        nbors = nbors[:len(nbors) - 2] + nbors[len(nbors) - 1:len(nbors)] + nbors[len(nbors) - 2:len(nbors) - 1]
-    else:
-        nbors
+    div = []
+    for i in range(len(nbors)):
+        # computing entropy backwards, and collecting entropy values
+        diversity = entropy.calcShannonEnt(knnT[:len(knnT) - i - 1] + knnT[len(knnT) - i:len(knnT)])
+        div.append(diversity)
+    print(div)
+
+    # looking for the max entropy
+    bestDiv = max(div)
+    # getting index of the best neighbor sets, even if there are more then one record matches the max entropy
+    # the reason is that the entropy value added to the div list with a sequence that minimize the distance
+    # meaning the one in the front has lower total distance
+    bestIndex = div.index(bestDiv)
+    # print(bestIndex)
+    bestNbor = knnT[:len(knnT) - bestIndex - 1] + knnT[len(knnT) - bestIndex:len(knnT)]
+    # print('###',bestNbor)
+
+    nbors = nbors[:len(nbors) - bestIndex - 1] + nbors[len(nbors) - bestIndex:len(nbors)]
+
     return nbors
 
 
@@ -94,7 +106,7 @@ if __name__ == "__main__":
     # calculating knn for each point
     # e.g. find all neighbors with types for the first point
     p0 = 0
-    k = 5
+    k = 5  # Num of neighbors
     neighbors = knn(pSets, fTypes, pSets[p0], k)
     # print(neighbors)
 
