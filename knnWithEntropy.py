@@ -32,7 +32,7 @@ def knn(pS, fTs, pLatLon, k):
 
             # adding the latest neighbor to the adjusted neighbor list
             neighborsAfter.append(targetPNbrs[len(targetPNbrs) - 1:len(targetPNbrs)][0])
-            print('\nOriginal', assignFT(fTs, neighborsAfter))
+            # print('\nOriginal', assignFT(fTs, neighborsAfter))
 
             # when more than 2 neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list

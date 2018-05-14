@@ -33,13 +33,13 @@ def knn(pS, fTs, pLatLon, k):
 
             # adding the latest neighbor to the adjusted neighbor list
             neighborsAfter.append(targetPNbrs[len(targetPNbrs) - 1:len(targetPNbrs)][0])
-            print('\nOriginal', assignFT(fTs, neighborsAfter))
+            # print('\nOriginal', assignFT(fTs, neighborsAfter))
 
             # when more than 2 neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list
             if len(neighborsAfter) > k:
                 neighborsAfter = checkNeighbor(fTs, neighborsAfter)
-                print('Adjusted', assignFT(fTs, neighborsAfter))
+                # print('Adjusted', assignFT(fTs, neighborsAfter))
             else:  # when less than 2 neighbors found, add to the neighbor list directly
                 neighborsAfter = neighborsAfter
 
@@ -79,7 +79,7 @@ def checkNeighbor(fTs, nbors):
         # computing entropy backwards, and collecting entropy values
         diversity = entropy.calcShannonEnt(knnT[:len(knnT) - i - 1] + knnT[len(knnT) - i:len(knnT)])
         div.append(diversity)
-    print(div)
+    # print(div)
 
     # looking for the max entropy
     bestDiv = max(div)
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     # calculating knn for each point
     # e.g. find all neighbors with types for the first point
     p0 = 0
-    k = 5  # Num of neighbors
+    k = 6  # Num of neighbors
     neighbors = knn(pSets, fTypes, pSets[p0], k)
     # print(neighbors)
 
