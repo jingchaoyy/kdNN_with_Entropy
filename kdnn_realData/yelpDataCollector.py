@@ -46,7 +46,7 @@ def dataPre(filePath):
     # Collecting restaurants in a specific state
     restaurants = []
     for RS in allRest:
-        if RS.sta == 'NY':
+        if RS.sta == 'SC':
             restaurants.append(RS)
 
     return restaurants
