@@ -43,19 +43,21 @@ def dataPre(filePath):
 
         allRest.append(rest)
 
-    # Collecting restaurants in AZ
-    AZ = []
+    # Collecting restaurants in a specific state
+    restaurants = []
     for RS in allRest:
-        if RS.sta == 'AZ':
-            AZ.append(RS)
+        if RS.sta == 'NY':
+            restaurants.append(RS)
 
-    return AZ
+    return restaurants
 
 
 # restaurants in AZ with coordinates from original datasets
-STFY = dataPre("/yelpData/business.json")
-allPoints = []
-for i in STFY:
+restsInST = dataPre("/yelpData/business.json")
+allPoints, allCategories = [], []
+for i in restsInST:
     allPoints.append(i.xy)
+    allCategories.append(i.categor)
+    # print(i.name, i.xy, i.categor)
 
-# print(allPoints)
+# print('Total', len(allPoints), 'restaurants tested')
