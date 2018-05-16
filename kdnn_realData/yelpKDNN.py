@@ -41,15 +41,17 @@ def knn(pS, fTs, pLatLon, k):
             if len(neighborsAfter) > k:
                 neighborsAfter = checkNeighbor(fTs, neighborsAfter)
                 print('Adjusted', assignFT(fTs, neighborsAfter))
-            else:  # when less than 2 neighbors found, add to the neighbor list directly
+                print('nondominated neighbor set:', neighborsAfter)
+
+            else:  # when less than minimum required neighbors found, add to the neighbor list directly
                 neighborsAfter = neighborsAfter
+                print('nondominated neighbor set:', neighborsAfter)
 
     print('\n\n######################## Original Vs. Final Results #################################')
     print('Original Neighbors:', targetPNbrs)
     print('Original Food Type Rank:', assignFT(fTs, targetPNbrs))
     print('Final Neighbors:', neighborsAfter)
     print('Final Food Type Rank:', assignFT(fTs, neighborsAfter))
-    return neighborsAfter
 
 
 """ Function defined to output all neighbors with 
@@ -88,7 +90,9 @@ def checkNeighbor(fTs, nbors):
 
         diversity = entropy.calcShannonEnt(sets)
         div.append(diversity)
-    print(div)
+        print(sets)
+        print(diversity)
+    # print(div)
 
     # looking for the max entropy
     bestDiv = max(div)
@@ -101,22 +105,28 @@ def checkNeighbor(fTs, nbors):
     # print('###',bestNbor)
 
     nbors = nbors[:len(nbors) - bestIndex - 1] + nbors[len(nbors) - bestIndex:len(nbors)]
-
+    # print(nbors)
     return nbors
 
 
 if __name__ == "__main__":
     # generating 100 points randomly
     pSets = yelpDataCollector.allPoints
-    # print(pSets)
+    # print(pSets[0])
     fTypes = yelpDataCollector.allCategories
     # print(fTypes)
 
-    # calculating knn for each point
-    # e.g. find all neighbors with types for the first point
-    p0 = 0
+    userAddr = [(35.04728681, -80.99055881)]  # input user location
+    addUser = userAddr + pSets[:50]  # add user location to the restaurant list
+    fullSet = np.array(addUser)  # convert to numpy array for knn
+    nearestRest = NearestNeighbors(n_neighbors=2, algorithm='ball_tree').fit(fullSet)
+    dist, restIndex = nearestRest.kneighbors(fullSet)  # knn for k=2
+    # retrieving neighbors for target point
+    p0 = restIndex[0][1] - 1  # get the nearest restaurant of user,
+    # and assign p0 with the restaurant index of original restaurant list
+
     k = 6  # Num of neighbors
-    neighbors = knn(pSets, fTypes, pSets[p0], k)
+    neighbors = knn(pSets[:50], fTypes, pSets[p0], k)  # start from p0, collect all 6 nearest restaurant
     # print(neighbors)
 
 tEnd = time.time()
