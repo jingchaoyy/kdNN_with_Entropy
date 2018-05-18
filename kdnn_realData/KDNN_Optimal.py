@@ -14,9 +14,8 @@ tStart = time.time()
 
 """ Entropy enabled knn
 Algorithm will compute the diversity/ entropy each time when a new neighbor added
-and adjust the the sequence to compare all combinations in the list to have the max 
-entropy sets. In a way, it is always give the most diverse neighbor sets with lowest
-total distance
+choose k out of total n neighbors found, and calculate to have the max entropy sets. 
+In a way, it provides all non-dominated sets
 """
 
 
@@ -33,16 +32,16 @@ def knn(pS, fTs, pLatLon, k):
             # retrieving neighbors for target point
             targetPNbrs = neighbors[pLocation]
 
-            # when more than 2 neighbors found, check if a switch of the last two can improve the diversity,
+            # when more than k neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list
             if len(targetPNbrs) > k:
-                subs = findsubsets(targetPNbrs, k)
+                subs = findsubsets(targetPNbrs, k)  # get all the combinations (choose k out of n)
                 bestDiv = checkNeighbor(fTs, subs)
 
                 print('Adjusted', assignFT(fTs, bestDiv))
                 print('nondominated neighbor set:', bestDiv)
 
-                if nonDominated[-1] != bestDiv: # see if the last added nonDominated sets is tha same
+                if nonDominated[-1] != bestDiv:  # see if the last added nonDominated sets is tha same
                     #  as the latest one, if the same, ignore the latest one
                     nonDominated.append(bestDiv)
 
@@ -60,9 +59,13 @@ def knn(pS, fTs, pLatLon, k):
     return nonDominated
 
 
-def findsubsets(S,k):
-    return set(itertools.combinations(S, k))
+""" Function defined to output all subsets
+(Choose k out of n)
+"""
 
+
+def findsubsets(S, k):
+    return set(itertools.combinations(S, k))
 
 
 """ Function defined to output all neighbors with 
@@ -98,7 +101,6 @@ def checkNeighbor(fTs, subsets):
                 sets.append(k)
         diversity = entropy.calcShannonEnt(sets)
         divList.append(diversity)
-
 
     # looking for the max entropy
     bestDiv = max(divList)

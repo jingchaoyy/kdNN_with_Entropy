@@ -13,9 +13,8 @@ tStart = time.time()
 
 """ Entropy enabled knn
 Algorithm will compute the diversity/ entropy each time when a new neighbor added
-and adjust the the sequence to compare all combinations in the list to have the max 
-entropy sets. In a way, it is always give the most diverse neighbor sets with lowest
-total distance
+choose k out of k+1 neighbors found, and calculate to have the max entropy sets. 
+In a way, it provides all non-dominated sets
 """
 
 
@@ -33,11 +32,11 @@ def knn(pS, fTs, pLatLon, k):
             # retrieving neighbors for target point
             targetPNbrs = neighbors[pLocation]
 
-            # adding the latest neighbor to the adjusted neighbor list
+            # adding the latest neighbor to the adjusted neighbor list, total will always be k+1
             neighborsAfter.append(targetPNbrs[len(targetPNbrs) - 1:len(targetPNbrs)][0])
             print('\nOriginal', assignFT(fTs, neighborsAfter))
 
-            # when more than 2 neighbors found, check if a switch of the last two can improve the diversity,
+            # when more than k neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list
             if len(neighborsAfter) > k:
                 neighborsAfter = checkNeighbor(fTs, neighborsAfter)
