@@ -59,9 +59,7 @@ def knn(pS, fTs, pLatLon, k):
     print('Final Neighbors:', neighborsAfter)
     print('Final Food Type Rank:', assignFT(fTs, neighborsAfter))
 
-    print('\n\n######################## Non Dominated #################################')
-    for nd in nonDominated:
-        print('Non Dominated:', nd)
+    return nonDominated
 
 
 """ Function defined to output all neighbors with 
@@ -137,7 +135,9 @@ if __name__ == "__main__":
 
     k = 6  # Num of neighbors
     neighbors = knn(pSets[:50], fTypes, pSets[p0], k)  # start from p0, collect all 6 nearest restaurant
-    # print(neighbors)
+    print('\n\n######################## Non Dominated #################################')
+    for nd in neighbors:
+        print('Non Dominated:', nd)
 
 tEnd = time.time()
 print("\nTotal time: ", tEnd - tStart, "seconds")
