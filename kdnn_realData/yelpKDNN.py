@@ -42,17 +42,16 @@ def knn(pS, fTs, pLatLon, k):
             if len(neighborsAfter) > k:
                 neighborsAfter = checkNeighbor(fTs, neighborsAfter)
                 print('Adjusted', assignFT(fTs, neighborsAfter))
-                # print('nondominated neighbor set:', neighborsAfter)
-                if len(nonDominated) > 0:
-                    if nonDominated[-1] != neighborsAfter[:k]:  # see if the last added nonDominated sets is tha same
-                        # as the latest one, if the same, ignore the latest one
-                        nonDominated.append(neighborsAfter[:k])
-                else:  # when the list as no element, add directly
+                print('nondominated neighbor set:', neighborsAfter)
+                if nonDominated[-1] != neighborsAfter[:k]:  # see if the last added nonDominated sets is tha same
+                    # as the latest one, if the same, ignore the latest one
                     nonDominated.append(neighborsAfter[:k])
 
             else:  # when less than minimum required neighbors found, add to the neighbor list directly
                 neighborsAfter = neighborsAfter
                 print('nondominated neighbor set:', neighborsAfter)
+                if len(neighborsAfter) == k:  # add the first find knn set to the nonDominated list
+                    nonDominated.append(neighborsAfter[:k])
 
     print('\n\n######################## Original Vs. Final Results #################################')
     print('Original Neighbors:', targetPNbrs)
