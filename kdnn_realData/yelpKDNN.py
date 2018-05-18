@@ -24,6 +24,7 @@ def knn(pS, fTs, pLatLon, k):
     pLocation = pS.index(pLatLon)  # location for the target point in the list
     neighborsAfter = []  # Storing neighbors after each time getting neighbor check and switched
     # looking for knn one by one
+    nonDominated = []
     for i in range(len(pS) + 1):
         if i > 0:  # at least one nearest neighbor (i.e. itself)
             nbrs = NearestNeighbors(n_neighbors=i, algorithm='ball_tree').fit(X)
@@ -41,7 +42,13 @@ def knn(pS, fTs, pLatLon, k):
             if len(neighborsAfter) > k:
                 neighborsAfter = checkNeighbor(fTs, neighborsAfter)
                 print('Adjusted', assignFT(fTs, neighborsAfter))
-                print('nondominated neighbor set:', neighborsAfter)
+                # print('nondominated neighbor set:', neighborsAfter)
+                if len(nonDominated) > 0:
+                    if nonDominated[-1] != neighborsAfter[:k]:  # see if the last added nonDominated sets is tha same
+                        # as the latest one, if the same, ignore the latest one
+                        nonDominated.append(neighborsAfter[:k])
+                else:  # when the list as no element, add directly
+                    nonDominated.append(neighborsAfter[:k])
 
             else:  # when less than minimum required neighbors found, add to the neighbor list directly
                 neighborsAfter = neighborsAfter
@@ -52,6 +59,10 @@ def knn(pS, fTs, pLatLon, k):
     print('Original Food Type Rank:', assignFT(fTs, targetPNbrs))
     print('Final Neighbors:', neighborsAfter)
     print('Final Food Type Rank:', assignFT(fTs, neighborsAfter))
+
+    print('\n\n######################## Non Dominated #################################')
+    for nd in nonDominated:
+        print('Non Dominated:', nd)
 
 
 """ Function defined to output all neighbors with 
