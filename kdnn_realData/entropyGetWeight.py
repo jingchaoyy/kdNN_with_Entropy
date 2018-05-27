@@ -22,28 +22,28 @@ def calcShannonEnt(dataSet):
     wList = []
     for type in typeCounts:
         prob = float(typeCounts[type]) / countDataSet
-        weight = prob * log(prob, 2)
-        wList.append(abs(weight))
-        shannonEnt -= prob * log(prob, 2)
+        weight = log(prob, 2)
+        wList.append((type, abs(weight)))
+        shannonEnt -= log(prob, 2)
 
     return shannonEnt, wList
 
 
-dataSet1 = ['Chinese', 'Chinese']
-dataSet2 = ['Chinese', 'Japanese']
-dataSet3 = ['Chinese', 'Japanese', 'American']
-
-############ entropy for base set ##############
-dataSet4 = ['Chinese', 'Japanese', 'Italian', 'American']
-
-############ entropy after enlarge set data ##############
-dataSet5 = ['Chinese', 'Chinese', 'Japanese', 'Italian', 'American']
-dataSet6 = ['Chinese', 'Chinese', 'Japanese', 'Japanese', 'American']
-dataSet7 = ['Chinese', 'Chinese', 'Chinese', 'Japanese', 'Japanese']
-dataSet8 = ['Chinese', 'Chinese', 'Chinese', 'Chinese', 'Japanese']
-# dataSet9 = [['Chinese'], ['Japanese'], ['Italian'], ['American'],['Chinese'], ['Japanes'], ['Italia'], ['America']]
-
-data = [dataSet1, dataSet2, dataSet3, dataSet4, dataSet5, dataSet6, dataSet7, dataSet8]
-
-for d in data:
-    print(calcShannonEnt(d))
+# dataSet1 = ['Chinese', 'Chinese']
+# dataSet2 = ['Chinese', 'Japanese']
+# dataSet3 = ['Chinese', 'Japanese', 'American']
+#
+# ############ entropy for base set ##############
+# dataSet4 = ['Chinese', 'Japanese', 'Italian', 'American']
+#
+# ############ entropy after enlarge set data ##############
+# dataSet5 = ['Chinese', 'Chinese', 'Japanese', 'Italian', 'American']
+# dataSet6 = ['Chinese', 'Chinese', 'Japanese', 'Japanese', 'American']
+# dataSet7 = ['Chinese', 'Chinese', 'Chinese', 'Japanese', 'Japanese']
+# dataSet8 = ['Chinese', 'Chinese', 'Chinese', 'Chinese', 'Japanese']
+# # dataSet9 = [['Chinese'], ['Japanese'], ['Italian'], ['American'],['Chinese'], ['Japanes'], ['Italia'], ['America']]
+#
+# data = [dataSet1, dataSet2, dataSet3, dataSet4, dataSet5, dataSet6, dataSet7, dataSet8]
+#
+# for d in data:
+#     print(calcShannonEnt(d))
