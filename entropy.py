@@ -20,7 +20,7 @@ def calcShannonEnt(dataSet):
     for type in typeCounts:
         prob = float(typeCounts[type])/countDataSet
         # print prob
-        shannonEnt -= prob * log(prob,2)
+        shannonEnt -= log(prob,2)
 
     return shannonEnt
 
