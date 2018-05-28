@@ -20,7 +20,7 @@ choose k that ranked as the highest
 """
 
 
-def knn(pS, fTs, pLatLon, k):
+def knn(pS, fTs, pLatLon, kk):
     X = np.array(pS)
     pLocation = pS.index(pLatLon)  # location for the target point in the list
     nonDominated = []
@@ -36,8 +36,8 @@ def knn(pS, fTs, pLatLon, k):
 
             # when more than k neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list
-            if len(targetPNbrs) > k:
-                bestDiv = checkNeighbor(fTs, targetPNbrs, k)
+            if len(targetPNbrs) > kk:
+                bestDiv = checkNeighbor(fTs, targetPNbrs, kk)
                 print('Adjusted NID', bestDiv)
                 # print('nondominated neighbor set:', bestDiv)
 
@@ -47,7 +47,7 @@ def knn(pS, fTs, pLatLon, k):
 
             else:  # when less than minimum required neighbors found, add to the neighbor list directly
                 # print('nondominated neighbor set:', targetPNbrs)
-                if len(targetPNbrs) == k:  # add the first find knn set to the nonDominated list
+                if len(targetPNbrs) == kk:  # add the first find knn set to the nonDominated list
                     nonDominated.append(list(targetPNbrs))
 
     return nonDominated
@@ -72,7 +72,7 @@ entropy, and output k restaurants with highest entropy value
 """
 
 
-def checkNeighbor(fTs, nbors, k):
+def checkNeighbor(fTs, nbors, kk):
     # assign food type to all the neighbors first
     knnT = assignFT(fTs, nbors)
 
@@ -99,7 +99,7 @@ def checkNeighbor(fTs, nbors, k):
     knbors = []
     for z in div:
         knbors.append(z[1])  # collect neighbors
-    knbors = knbors[:6]  # get the first 6, as k == 6
+    knbors = knbors[:kk]  # get the first 6, as kk == 6
 
     neighborList = []  # put the selected neighbors in its original order (distance based)
     for a in nbors:
@@ -128,8 +128,8 @@ if __name__ == "__main__":
     p0 = restIndex[0][1] - 1  # get the nearest restaurant of user,
     # and assign p0 with the restaurant index of original restaurant list
 
-    k = 6  # Num of neighbors
-    neighbors = knn(pSets[:50], fTypes, pSets[p0], k)  # start from p0, collect all 6 nearest restaurant
+    kk = 6  # Num of neighbors
+    neighbors = knn(pSets[:50], fTypes, pSets[p0], kk)  # start from p0, collect all 6 nearest restaurant
     print('\n\n######################## Non Dominated #################################')
     for nd in neighbors:
         print('Non Dominated:', nd)
