@@ -20,7 +20,7 @@ choose k that ranked as the highest
 """
 
 
-def knn(pS, fTs, pLatLon, kk):
+def knn(pS, fTs, pLatLon, k):
     X = np.array(pS)
     pLocation = pS.index(pLatLon)  # location for the target point in the list
     nonDominated = []
@@ -33,22 +33,35 @@ def knn(pS, fTs, pLatLon, kk):
             # retrieving neighbors for target point
             targetPNbrs = neighbors[pLocation]
             print("\nOriginal NID", targetPNbrs)
+            targetDistances = distances[pLocation]
+
+            tnList = list(targetPNbrs)
+            tdList = list(targetDistances)
 
             # when more than k neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list
-            if len(targetPNbrs) > kk:
-                bestDiv = checkNeighbor(fTs, targetPNbrs, kk)
-                print('Adjusted NID', bestDiv)
+            if len(targetPNbrs) > k:
+                neighborsAfter = checkNeighbor(fTs, targetPNbrs, k)
+                print('Adjusted NID', neighborsAfter)
                 # print('nondominated neighbor set:', bestDiv)
 
-                if nonDominated[-1] != bestDiv:  # see if the last added nonDominated sets is tha same
+                distanceAfter = []
+                for na in neighborsAfter:
+                    if na in tnList:
+                        ind = tnList.index(na)
+                        distanceAfter.append(tdList[ind])
+                maxDist = max(distanceAfter)
+
+                if nonDominated[-1] != (
+                        neighborsAfter[:k], maxDist):  # see if the last added nonDominated sets is tha same
                     #  as the latest one, if the same, ignore the latest one
-                    nonDominated.append(bestDiv)
+                    nonDominated.append((neighborsAfter[:k], maxDist))
 
             else:  # when less than minimum required neighbors found, add to the neighbor list directly
                 # print('nondominated neighbor set:', targetPNbrs)
-                if len(targetPNbrs) == kk:  # add the first find knn set to the nonDominated list
-                    nonDominated.append(list(targetPNbrs))
+                if len(targetPNbrs) == k:  # add the first find knn set to the nonDominated list
+                    maxDisttd = max(tdList)
+                    nonDominated.append((tnList, maxDisttd))
 
     return nonDominated
 
