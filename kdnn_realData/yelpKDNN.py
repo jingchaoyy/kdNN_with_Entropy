@@ -33,11 +33,8 @@ def knn(pS, fTs, pLatLon, k):
             targetPNbrs = neighbors[pLocation]
             targetDistances = distances[pLocation]
 
-            tnList, tdList = [], []
-            for tn in targetPNbrs:
-                tnList.append(tn)
-            for td in targetDistances:
-                tdList.append(td)
+            tnList = list(targetPNbrs)
+            tdList = list(targetDistances)
 
             # adding the latest neighbor to the adjusted neighbor list, total will always be k+1
             neighborsAfter.append(targetPNbrs[len(targetPNbrs) - 1:len(targetPNbrs)][0])
