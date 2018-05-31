@@ -38,8 +38,6 @@ def knn(pS, fTs, pLatLon, k):
                 tnList.append(tn)
             for td in targetDistances:
                 tdList.append(td)
-            print('###############', tnList)
-            print('###############', tdList)
 
             # adding the latest neighbor to the adjusted neighbor list, total will always be k+1
             neighborsAfter.append(targetPNbrs[len(targetPNbrs) - 1:len(targetPNbrs)][0])
@@ -59,15 +57,17 @@ def knn(pS, fTs, pLatLon, k):
 
                 print('Adjusted', assignFT(fTs, neighborsAfter))
                 print('nondominated neighbor set:', neighborsAfter)
-                if nonDominated[-1] != (neighborsAfter[:k],maxDist):  # see if the last added nonDominated sets is tha same
+                if nonDominated[-1] != (
+                        neighborsAfter[:k], maxDist):  # see if the last added nonDominated sets is tha same
                     # as the latest one, if the same, ignore the latest one
-                    nonDominated.append((neighborsAfter[:k],maxDist))
+                    nonDominated.append((neighborsAfter[:k], maxDist))
 
             else:  # when less than minimum required neighbors found, add to the neighbor list directly
                 neighborsAfter = neighborsAfter
                 print('nondominated neighbor set:', neighborsAfter)
                 if len(neighborsAfter) == k:  # add the first find knn set to the nonDominated list
-                    nonDominated.append(neighborsAfter[:k])
+                    maxDisttd = max(tdList)
+                    nonDominated.append((neighborsAfter[:k], maxDisttd))
 
     print('\n\n######################## Original Vs. Final Results #################################')
     print('Original Neighbors:', targetPNbrs)
