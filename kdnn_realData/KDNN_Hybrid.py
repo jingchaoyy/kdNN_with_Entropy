@@ -79,6 +79,10 @@ def assignFT(fTs, nbors):
     return neighborTypes
 
 
+def getKey(item):
+    return item[0]
+
+
 """ Function defined to gather weight info for each category during 
 entropy calculation, rank each restaurant based on the total weighted
 entropy, and output k restaurants with highest entropy value
@@ -106,11 +110,15 @@ def checkNeighbor(fTs, nbors, kk):
         div.append((iEntropy, nbors[knnT.index(i)]))
     print("divOriginal", div)
 
-    div.sort(reverse=True)  # reverse sort list, from largest weighted div to smallest
-    print("divAdjusted", div)
+    # div.sort(reverse=True)
+    divSort = sorted(div, key=getKey,
+                     reverse=True)  # reverse sort list based on only the first element (entropy) in each tuple,
+    # from largest weighted div to smallest
+
+    print("divAdjusted", divSort)
 
     knbors = []
-    for z in div:
+    for z in divSort:
         knbors.append(z[1])  # collect neighbors
     knbors = knbors[:kk]  # get the first 6, as kk == 6
 
