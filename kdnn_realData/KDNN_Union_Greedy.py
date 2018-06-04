@@ -17,7 +17,7 @@ In a way, it provides all non-dominated sets
 """
 
 
-def knn(pS, fTs, pLatLon, k):
+def knn(pS, fTs, pLatLon, k):  # same as KDNN_Greedy
     newpS = pLatLon + pS  # adding user location to the list
     X = np.array(newpS)
     neighborsAfter = []  # Storing neighbors after each time getting neighbor check and switched
