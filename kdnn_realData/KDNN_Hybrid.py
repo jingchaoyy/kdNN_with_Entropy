@@ -21,27 +21,26 @@ choose k that ranked as the highest
 
 
 def knn(pS, fTs, pLatLon, k):
-    X = np.array(pS)
-    pLocation = pS.index(pLatLon)  # location for the target point in the list
+    newpS = pLatLon + pS  # adding user location to the list
+    X = np.array(newpS)
     nonDominated = []
-    targetPNbrs = ''
     for i in range(len(pS) + 1):
-        if i > 0:  # at least one nearest neighbor (i.e. itself)
+        if i > 1:  # at least one nearest neighbor (i.e. itself)
             nbrs = NearestNeighbors(n_neighbors=i, algorithm='ball_tree').fit(X)
             # return distances and ranked neighbors (presented as point location in array points)
             distances, neighbors = nbrs.kneighbors(X)
             # retrieving neighbors for target point
-            targetPNbrs = neighbors[pLocation]
-            print("\nOriginal NID", targetPNbrs)
-            targetDistances = distances[pLocation]
+            targetPNbrs = neighbors[0]
+            targetDistances = distances[0]
 
-            tnList = list(targetPNbrs)
-            tdList = list(targetDistances)
+            tnList = list(targetPNbrs)[1:]  # starting from the second one, first one is the user itself
+            print("\nOriginal NID", tnList)
+            tdList = list(targetDistances)[1:]
 
             # when more than k neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list
-            if len(targetPNbrs) > k:
-                neighborsAfter = checkNeighbor(fTs, targetPNbrs, k)
+            if len(tnList) > k:
+                neighborsAfter = checkNeighbor(fTs, tnList, k)
                 print('Adjusted NID', neighborsAfter)
                 # print('nondominated neighbor set:', bestDiv)
 
@@ -59,7 +58,7 @@ def knn(pS, fTs, pLatLon, k):
 
             else:  # when less than minimum required neighbors found, add to the neighbor list directly
                 # print('nondominated neighbor set:', targetPNbrs)
-                if len(targetPNbrs) == k:  # add the first find knn set to the nonDominated list
+                if len(tnList) == k:  # add the first find knn set to the nonDominated list
                     maxDisttd = max(tdList)
                     nonDominated.append((tnList, maxDisttd))
 
@@ -141,16 +140,16 @@ if __name__ == "__main__":
     # print(fTypes)
 
     userAddr = [(35.04728681, -80.99055881)]  # input user location
-    addUser = userAddr + pSets[:50]  # add user location to the restaurant list
-    fullSet = np.array(addUser)  # convert to numpy array for knn
-    nearestRest = NearestNeighbors(n_neighbors=2, algorithm='ball_tree').fit(fullSet)
-    dist, restIndex = nearestRest.kneighbors(fullSet)  # knn for k=2
-    # retrieving neighbors for target point
-    p0 = restIndex[0][1] - 1  # get the nearest restaurant of user,
-    # and assign p0 with the restaurant index of original restaurant list
+    # addUser = userAddr + pSets[:50]  # add user location to the restaurant list
+    # fullSet = np.array(addUser)  # convert to numpy array for knn
+    # nearestRest = NearestNeighbors(n_neighbors=2, algorithm='ball_tree').fit(fullSet)
+    # dist, restIndex = nearestRest.kneighbors(fullSet)  # knn for k=2
+    # # retrieving neighbors for target point
+    # p0 = restIndex[0][1] - 1  # get the nearest restaurant of user,
+    # # and assign p0 with the restaurant index of original restaurant list
 
     kk = 6  # Num of neighbors
-    neighbors = knn(pSets[:50], fTypes, pSets[p0], kk)  # start from p0, collect all 6 nearest restaurant
+    neighbors = knn(pSets[:50], fTypes, userAddr, kk)  # start from p0, collect all 6 nearest restaurant
     print('\n\n######################## Non Dominated #################################')
     for nd in neighbors:
         print('Non Dominated:', nd)
