@@ -10,12 +10,12 @@ allNews = pd.read_csv('yelpData/news_Separate.csv')
 categories = allNews['CATEGORY']
 lat, lon = allNews['LAT'], allNews['LON']
 
-cates, coors = [],[]
+allCategories, allPoints = [],[]
 for i in range(len(categories)):
     cate = []
     for j in categories[i].split(','):
         cate.append(j)
-    cates.append(cate)
-    coors.append((lat[i],lon[i]))
+    allCategories.append(cate)
+    allPoints.append((lat[i],lon[i]))
 
-# print(cates)
+# print(allCategories)
