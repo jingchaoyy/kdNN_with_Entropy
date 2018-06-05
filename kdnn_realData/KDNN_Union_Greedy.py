@@ -5,7 +5,9 @@ Created on 5/18/18
 """
 from sklearn.neighbors import NearestNeighbors
 import numpy as np
-from kdnn_realData import yelpDataCollector
+# from kdnn_realData import dataCollector_Yelp
+# from kdnn_realData import dataCollector_News
+from kdnn_realData import dataCollector_Pubmed
 import time
 
 tStart = time.time()
@@ -75,7 +77,6 @@ def knn(pS, fTs, pLatLon, k):  # same as KDNN_Greedy
     return nonDominated
 
 
-
 """ Function defined to output all neighbors with 
 assigned food types for input point latlon
 """
@@ -85,7 +86,8 @@ def assignFT(fTs, nbors):
     neighborTypes = []
     # assign each neighbor with their color type
     for n in nbors:
-        neighborTypes.append(fTs[n])
+        neighborTypes.append(
+            fTs[n - 1])  # n - 1 due to the sequence all push back by 1 after adding user location to the locationlist
     return neighborTypes
 
 
@@ -144,20 +146,22 @@ def checkNeighbor(fTs, nbors):
 
 
 if __name__ == "__main__":
-    # generating 100 points randomly
-    pSets = yelpDataCollector.allPoints
-    # print(pSets[0])
-    fTypes = yelpDataCollector.allCategories
-    # print(fTypes)
+    # generating real points with categories
 
-    userAddr = [(35.04728681, -80.99055881)]  # input user location
-    # addUser = userAddr + pSets[:50]  # add user location to the restaurant list
-    # fullSet = np.array(addUser)  # convert to numpy array for knn
-    # nearestRest = NearestNeighbors(n_neighbors=2, algorithm='ball_tree').fit(fullSet)
-    # dist, restIndex = nearestRest.kneighbors(fullSet)  # knn for k=2
-    # # retrieving neighbors for target point
-    # p0 = restIndex[0][1] - 1  # get the nearest restaurant of user,
-    # # and assign p0 with the restaurant index of original restaurant list
+    # ############## Yelp #################
+    # pSets = dataCollector_Yelp.allPoints
+    # fTypes = dataCollector_Yelp.allCategories
+    # userAddr = [(35.04728681, -80.99055881)]  # input user location
+
+    # ############## News #################
+    # pSets = dataCollector_News.allPoints
+    # fTypes = dataCollector_News.allCategories
+    # userAddr = [(-12.97221841, -38.50141361)]  # input user location
+
+    ############## Publication #################
+    pSets = dataCollector_Pubmed.allPoints
+    fTypes = dataCollector_Pubmed.allCategories
+    userAddr = [(52.15714851, 4.4852091)]  # input user location
 
     k = 6  # Num of neighbors
     neighbors = knn(pSets[:50], fTypes, userAddr, k)  # start from p0, collect all 6 nearest restaurant
