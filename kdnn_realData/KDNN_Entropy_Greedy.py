@@ -7,7 +7,8 @@ from sklearn.neighbors import NearestNeighbors
 import numpy as np
 # from kdnn_realData import dataCollector_Yelp
 # from kdnn_realData import dataCollector_News
-from kdnn_realData import dataCollector_Pubmed
+# from kdnn_realData import dataCollector_Pubmed
+import dataGenerator
 import entropy
 import time
 
@@ -160,10 +161,19 @@ if __name__ == "__main__":
     # fTypes = dataCollector_News.allCategories
     # userAddr = [(-12.97221841, -38.50141361)]  # input user location
 
-    ############## Publication #################
-    pSets = dataCollector_Pubmed.allPoints
-    fTypes = dataCollector_Pubmed.allCategories
-    userAddr = [(52.15714851, 4.4852091)]  # input user location
+    # ############## Publication #################
+    # pSets = dataCollector_Pubmed.allPoints
+    # fTypes = dataCollector_Pubmed.allCategories
+    # userAddr = [(52.15714851, 4.4852091)]  # input user location
+
+    ############## Synthetic Data #################
+    x, y = 0, 0
+    userAddr = [(x, y)]  # input user location
+    numRecords = 1000
+    searchRange = 500
+    cateNum = 10
+    cateRange = 200
+    pSets, fTypes = dataGenerator.randomData(numRecords, searchRange, x, y, cateNum, cateRange)
 
     k = 6  # Num of neighbors
     neighbors = knn(pSets[:50], fTypes, userAddr, k)  # start from p0, collect all 6 nearest restaurant
