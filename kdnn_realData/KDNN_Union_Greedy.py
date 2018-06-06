@@ -72,13 +72,16 @@ def knn(pS, fTs, pLatLon, k):
                 print('nondominated neighbor set:', neighborsAfter)
                 if len(neighborsAfter) == k:  # add the first find knn set to the nonDominated list
                     maxDisttd = max(tdList)
+                    runTStart1 = time.time()
                     atts = assignFT(fTs, tnList)
                     attSets = []
                     for att in atts:
                         for a in att:
                             attSets.append(a)
                     diversity = len(Remove(attSets))
-                    nonDominated.append((neighborsAfter[:k], maxDisttd, diversity))
+                    runTEnd1 = time.time()
+                    runT1 = runTEnd1 - runTStart1  # get the runtime
+                    nonDominated.append((neighborsAfter[:k], maxDisttd, diversity, runT1))
 
     print('\n\n######################## Original Vs. Final Results #################################')
     print('Original Neighbors:', tnList)
