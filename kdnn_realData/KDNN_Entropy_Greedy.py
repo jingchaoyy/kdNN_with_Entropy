@@ -54,7 +54,6 @@ def knn(pS, fTs, pLatLon, k):
                 divAfter = resultNbor[1]  # entropy of the neighbor set
                 runT = runTEnd - runTStart  # get the runtime
 
-
                 distanceAfter = []
                 for na in neighborsAfter:
                     if na in tnList:
@@ -167,7 +166,7 @@ if __name__ == "__main__":
     neighbors = knn(pSets[:50], fTypes, userAddr, k)  # start from p0, collect all 6 nearest restaurant
     print('\n\n######################## Non Dominated #################################')
     for nd in neighbors:
-        print('Non Dominated:', nd)
+        print('(Nbor, Dist, Div, RT): ', nd)
 
 tEnd = time.time()
 print("\nTotal time: ", tEnd - tStart, "seconds")
