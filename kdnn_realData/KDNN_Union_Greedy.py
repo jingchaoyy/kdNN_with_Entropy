@@ -19,7 +19,8 @@ In a way, it provides all non-dominated sets
 """
 
 
-def knn(pS, fTs, pLatLon, k):  # same as KDNN_Greedy
+# same as KDNN_Greedy
+def knn(pS, fTs, pLatLon, k):
     newpS = pLatLon + pS  # adding user location to the list
     X = np.array(newpS)
     neighborsAfter = []  # Storing neighbors after each time getting neighbor check and switched
@@ -45,7 +46,13 @@ def knn(pS, fTs, pLatLon, k):  # same as KDNN_Greedy
             # when more than k neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list
             if len(neighborsAfter) > k:
-                neighborsAfter = checkNeighbor(fTs, neighborsAfter)
+
+                runTStart = time.time()
+                resultNbor = checkNeighbor(fTs, neighborsAfter)
+                runTEnd = time.time()
+                neighborsAfter = resultNbor[0]  # set of neighbors
+                divAfter = resultNbor[1]  # entropy of the neighbor set
+                runT = runTEnd - runTStart  # get the runtime
 
                 distanceAfter = []
                 for na in neighborsAfter:
@@ -56,17 +63,22 @@ def knn(pS, fTs, pLatLon, k):  # same as KDNN_Greedy
 
                 print('Adjusted', assignFT(fTs, neighborsAfter))
                 print('nondominated neighbor set:', neighborsAfter)
-                if nonDominated[-1] != (
-                        neighborsAfter[:k], maxDist):  # see if the last added nonDominated sets is tha same
+                if nonDominated[-1][0] != neighborsAfter[:k]:  # see if the last added nonDominated sets is tha same
                     # as the latest one, if the same, ignore the latest one
-                    nonDominated.append((neighborsAfter[:k], maxDist))
+                    nonDominated.append((neighborsAfter[:k], maxDist, divAfter, runT))
 
             else:  # when less than minimum required neighbors found, add to the neighbor list directly
                 neighborsAfter = neighborsAfter
                 print('nondominated neighbor set:', neighborsAfter)
                 if len(neighborsAfter) == k:  # add the first find knn set to the nonDominated list
                     maxDisttd = max(tdList)
-                    nonDominated.append((neighborsAfter[:k], maxDisttd))
+                    atts = assignFT(fTs, tnList)
+                    attSets = []
+                    for att in atts:
+                        for a in att:
+                            attSets.append(a)
+                    diversity = len(Remove(attSets))
+                    nonDominated.append((neighborsAfter[:k], maxDisttd, diversity))
 
     print('\n\n######################## Original Vs. Final Results #################################')
     print('Original Neighbors:', tnList)
@@ -142,7 +154,7 @@ def checkNeighbor(fTs, nbors):
 
     nbors = nbors[:len(nbors) - bestIndex - 1] + nbors[len(nbors) - bestIndex:len(nbors)]
     # print(nbors)
-    return nbors
+    return nbors, bestDiv
 
 
 if __name__ == "__main__":
@@ -167,7 +179,7 @@ if __name__ == "__main__":
     neighbors = knn(pSets[:50], fTypes, userAddr, k)  # start from p0, collect all 6 nearest restaurant
     print('\n\n######################## Non Dominated #################################')
     for nd in neighbors:
-        print('Non Dominated:', nd)
+        print('(Nbor, Dist, Div, RT): ', nd)
 
 tEnd = time.time()
 print("\nTotal time: ", tEnd - tStart, "seconds")
