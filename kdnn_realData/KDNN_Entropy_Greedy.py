@@ -5,14 +5,8 @@ Created on 5/14/18
 """
 from sklearn.neighbors import NearestNeighbors
 import numpy as np
-# from kdnn_realData import dataCollector_Yelp
-# from kdnn_realData import dataCollector_News
-# from kdnn_realData import dataCollector_Pubmed
-import dataGenerator
 import entropy
 import time
-
-tStart = time.time()
 
 """ Entropy enabled knn
 Algorithm will compute the diversity/ entropy each time when a new neighbor added
@@ -42,7 +36,8 @@ def knn(pS, fTs, pLatLon, k):
 
             # adding the latest neighbor to the adjusted neighbor list, total will always be k+1
             neighborsAfter.append(tnList[len(tnList) - 1:len(tnList)][0])
-            print('\nOriginal', assignFT(fTs, neighborsAfter))
+            print('\nOriginal', neighborsAfter)
+            print('Original', assignFT(fTs, neighborsAfter))
 
             # when more than k neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list
@@ -146,40 +141,3 @@ def checkNeighbor(fTs, nbors):
     nbors = nbors[:len(nbors) - bestIndex - 1] + nbors[len(nbors) - bestIndex:len(nbors)]
     # print(nbors)
     return nbors, bestDiv
-
-
-if __name__ == "__main__":
-    # generating real points with categories
-
-    # ############## Yelp #################
-    # pSets = dataCollector_Yelp.allPoints
-    # fTypes = dataCollector_Yelp.allCategories
-    # userAddr = [(35.04728681, -80.99055881)]  # input user location
-
-    # ############## News #################
-    # pSets = dataCollector_News.allPoints
-    # fTypes = dataCollector_News.allCategories
-    # userAddr = [(-12.97221841, -38.50141361)]  # input user location
-
-    # ############## Publication #################
-    # pSets = dataCollector_Pubmed.allPoints
-    # fTypes = dataCollector_Pubmed.allCategories
-    # userAddr = [(52.15714851, 4.4852091)]  # input user location
-
-    ############## Synthetic Data #################
-    x, y = 0, 0
-    userAddr = [(x, y)]  # input user location
-    numRecords = 1000
-    searchRange = 500
-    cateNum = 10
-    cateRange = 200
-    pSets, fTypes = dataGenerator.randomData(numRecords, searchRange, x, y, cateNum, cateRange)
-
-    k = 6  # Num of neighbors
-    neighbors = knn(pSets[:50], fTypes, userAddr, k)  # start from p0, collect all 6 nearest restaurant
-    print('\n\n######################## Non Dominated #################################')
-    for nd in neighbors:
-        print('(Nbor, Dist, Div, RT): ', nd)
-
-tEnd = time.time()
-print("\nTotal time: ", tEnd - tStart, "seconds")
