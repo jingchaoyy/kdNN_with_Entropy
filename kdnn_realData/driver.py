@@ -4,8 +4,8 @@ Created on 6/7/18
 @author: Jingchao Yang
 """
 ############## data source ##############
-from kdnn_realData import dataCollector_Yelp
-# from kdnn_realData import dataCollector_News
+# from kdnn_realData import dataCollector_Yelp
+from kdnn_realData import dataCollector_News
 # from kdnn_realData import dataCollector_Pubmed
 # import dataGenerator
 
@@ -17,19 +17,21 @@ from kdnn_realData import KDNN_Union_Greedy
 from kdnn_realData import KDNN_Union_Optimal
 
 import time
+import random
 
 if __name__ == "__main__":
     tStart = time.time()
-    # generating real points with categories
 
-    ############## Yelp #################
-    pSets = dataCollector_Yelp.allPoints
-    fTypes = dataCollector_Yelp.allCategories
-    userAddr = [(35.04728681, -80.99055881)]  # input user location
+    k = 6  # Num of neighbors
 
-    # ############## News #################
-    # pSets = dataCollector_News.allPoints
-    # fTypes = dataCollector_News.allCategories
+    # ############## Yelp #################
+    # pSets = dataCollector_Yelp.allPoints
+    # fTypes = dataCollector_Yelp.allCategories
+    # userAddr = [(35.04728681, -80.99055881)]  # input user location
+
+    ############## News #################
+    pSets = dataCollector_News.allPoints
+    fTypes = dataCollector_News.allCategories
     # userAddr = [(-12.97221841, -38.50141361)]  # input user location
 
     # ############## Publication #################
@@ -46,14 +48,21 @@ if __name__ == "__main__":
     # cateRange = 200
     # pSets, fTypes = dataGenerator.randomData(numRecords, searchRange, x, y, cateNum, cateRange)
 
-    k = 6  # Num of neighbors
+    for i in range(1):
+        id = random.randint(0,50)
+        print(id)
+        # print(pSets)
+        # getLoc = pSets[id]
+        # print(id, getLoc)
+        # userAddr = [(getLoc[0] + 1 / 100000000, getLoc[1] + 1 / 100000000)]
+        userAddr = [(-12.97221841, -38.50141361)]  # input user location
 
-    # select an algorithm for kdnn
-    neighbors = KDNN_Union_Optimal.knn(pSets[:50], fTypes, userAddr,
-                                      k)  # start from p0, collect all 6 nearest restaurant
-    print('\n\n######################## Non Dominated #################################')
-    for nd in neighbors:
-        print('(Nbor, Dist, Div, RT): ', nd)
+        # select an algorithm for kdnn
+        neighbors = KDNN_Entropy_Greedy.knn(pSets[:50], fTypes, userAddr,
+                                            k)  # start from p0, collect all 6 nearest restaurant
+        print('\n\n######################## Non Dominated #################################')
+        for nd in neighbors:
+            print('(Nbor, Dist, Div, RT): ', nd)
 
 tEnd = time.time()
 print("\nTotal time: ", tEnd - tStart, "seconds")
