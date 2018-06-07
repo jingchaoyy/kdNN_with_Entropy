@@ -5,12 +5,7 @@ Created on 5/18/18
 """
 from sklearn.neighbors import NearestNeighbors
 import numpy as np
-# from kdnn_realData import dataCollector_Yelp
-# from kdnn_realData import dataCollector_News
-from kdnn_realData import dataCollector_Pubmed
 import time
-
-tStart = time.time()
 
 """ Union enabled knn
 Algorithm will compute the diversity/ entropy each time when a new neighbor added
@@ -158,31 +153,3 @@ def checkNeighbor(fTs, nbors):
     nbors = nbors[:len(nbors) - bestIndex - 1] + nbors[len(nbors) - bestIndex:len(nbors)]
     # print(nbors)
     return nbors, bestDiv
-
-
-if __name__ == "__main__":
-    # generating real points with categories
-
-    # ############## Yelp #################
-    # pSets = dataCollector_Yelp.allPoints
-    # fTypes = dataCollector_Yelp.allCategories
-    # userAddr = [(35.04728681, -80.99055881)]  # input user location
-
-    # ############## News #################
-    # pSets = dataCollector_News.allPoints
-    # fTypes = dataCollector_News.allCategories
-    # userAddr = [(-12.97221841, -38.50141361)]  # input user location
-
-    ############## Publication #################
-    pSets = dataCollector_Pubmed.allPoints
-    fTypes = dataCollector_Pubmed.allCategories
-    userAddr = [(52.15714851, 4.4852091)]  # input user location
-
-    k = 6  # Num of neighbors
-    neighbors = knn(pSets[:50], fTypes, userAddr, k)  # start from p0, collect all 6 nearest restaurant
-    print('\n\n######################## Non Dominated #################################')
-    for nd in neighbors:
-        print('(Nbor, Dist, Div, RT): ', nd)
-
-tEnd = time.time()
-print("\nTotal time: ", tEnd - tStart, "seconds")
