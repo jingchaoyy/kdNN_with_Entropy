@@ -1,13 +1,13 @@
 """
 Created on 6/7/18
 
-@author: YJccccc
+@author: Jingchao Yang
 """
 ############## data source ##############
 from kdnn_realData import dataCollector_Yelp
 # from kdnn_realData import dataCollector_News
 # from kdnn_realData import dataCollector_Pubmed
-import dataGenerator
+# import dataGenerator
 
 ############## algorithms ##############
 from kdnn_realData import KDNN_Entropy_Greedy
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     k = 6  # Num of neighbors
 
     # select an algorithm for kdnn
-    neighbors = KDNN_Union_Greedy.knn(pSets[:50], fTypes, userAddr,
+    neighbors = KDNN_Union_Optimal.knn(pSets[:50], fTypes, userAddr,
                                       k)  # start from p0, collect all 6 nearest restaurant
     print('\n\n######################## Non Dominated #################################')
     for nd in neighbors:
