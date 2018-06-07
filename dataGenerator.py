@@ -25,9 +25,9 @@ def randomData(num=100, radius=500, query_x=0, query_y=0, catNum=5, catRange=26)
         allPoints.append((loc_x, loc_y))
         while len(catTmp) < catNum:
             catTmp.add(random.randint(0, catRange))
-            allCategories.append(list(catTmp))
+        allCategories.append(list(catTmp))
     # print(allPoints)
-    # print(allCategories)
+    print(allCategories)
     return allPoints, allCategories
 
 
