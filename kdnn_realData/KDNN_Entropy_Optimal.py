@@ -5,14 +5,9 @@ Created on 5/18/18
 """
 from sklearn.neighbors import NearestNeighbors
 import numpy as np
-# from kdnn_realData import dataCollector_Yelp
-# from kdnn_realData import dataCollector_News
-from kdnn_realData import dataCollector_Pubmed
 import entropy
 import time
 import itertools
-
-tStart = time.time()
 
 """ Entropy enabled knn
 Algorithm will compute the diversity/ entropy each time when a new neighbor added
@@ -43,9 +38,16 @@ def knn(pS, fTs, pLatLon, k):
 
             # when more than k neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list
-            if len(tnList) > k:
+            if len(tnList) >= k:
                 subs = findsubsets(tnList, k)  # get all the combinations (choose k out of n)
-                neighborsAfter = checkNeighbor(fTs, subs)
+                # neighborsAfter = checkNeighbor(fTs, subs)
+
+                runTStart = time.time()
+                resultNbor = checkNeighbor(fTs, subs)
+                runTEnd = time.time()
+                neighborsAfter = resultNbor[0]  # set of neighbors
+                divAfter = resultNbor[1]  # entropy of the neighbor set
+                runT = runTEnd - runTStart  # get the runtime
 
                 distanceAfter = []
                 for na in neighborsAfter:
@@ -58,16 +60,18 @@ def knn(pS, fTs, pLatLon, k):
                 print('Adjusted', assignFT(fTs, neighborsAfter))
                 print('nondominated neighbor set:', (neighborsAfter[:k], maxDist))
 
-                if nonDominated[-1] != (
-                        neighborsAfter[:k], maxDist):  # see if the last added nonDominated sets is tha same
-                    #  as the latest one, if the same, ignore the latest one
-                    nonDominated.append((neighborsAfter[:k], maxDist))
+                if len(tnList) == k:
+                    nonDominated.append((neighborsAfter, maxDist, divAfter, runT))
 
-            else:  # when less than minimum required neighbors found, add to the neighbor list directly
-                print('nondominated neighbor set:', tnList)
-                if len(tnList) == k:  # add the first find knn set to the nonDominated list
-                    maxDisttd = max(tdList)
-                    nonDominated.append((tnList, maxDisttd))
+                elif nonDominated[-1][0] != neighborsAfter:  # see if the last added nonDominated sets is tha same
+                    # as the latest one, if the same, ignore the latest one
+                    nonDominated.append((neighborsAfter, maxDist, divAfter, runT))
+
+            # else:  # when less than minimum required neighbors found, add to the neighbor list directly
+            #     print('nondominated neighbor set:', tnList)
+            #     if len(tnList) == k:  # add the first find knn set to the nonDominated list
+            #         maxDisttd = max(tdList)
+            #         nonDominated.append((tnList, maxDisttd))
 
     print('\n\n######################## Original Vs. Final Results #################################')
     print('Original Neighbors:', tnList)
@@ -129,32 +133,4 @@ def checkNeighbor(fTs, subsets):
 
     nbors = list(subsetList[bestIndex])
     # print(nbors)
-    return nbors
-
-
-if __name__ == "__main__":
-    # generating real points with categories
-
-    # ############## Yelp #################
-    # pSets = dataCollector_Yelp.allPoints
-    # fTypes = dataCollector_Yelp.allCategories
-    # userAddr = [(35.04728681, -80.99055881)]  # input user location
-
-    # ############## News #################
-    # pSets = dataCollector_News.allPoints
-    # fTypes = dataCollector_News.allCategories
-    # userAddr = [(-12.97221841, -38.50141361)]  # input user location
-
-    ############## Publication #################
-    pSets = dataCollector_Pubmed.allPoints
-    fTypes = dataCollector_Pubmed.allCategories
-    userAddr = [(52.15714851, 4.4852091)]  # input user location
-
-    k = 6  # Num of neighbors
-    neighbors = knn(pSets[:50], fTypes, userAddr, k)  # start from p0, collect all 6 nearest restaurant
-    print('\n\n######################## Non Dominated #################################')
-    for nd in neighbors:
-        print('Non Dominated:', nd)
-
-tEnd = time.time()
-print("\nTotal time: ", tEnd - tStart, "seconds")
+    return nbors, bestDiv
