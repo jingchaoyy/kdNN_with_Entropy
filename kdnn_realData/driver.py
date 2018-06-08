@@ -5,9 +5,9 @@ Created on 6/7/18
 """
 ############## data source ##############
 # from kdnn_realData import dataCollector_Yelp
-from kdnn_realData import dataCollector_News
+# from kdnn_realData import dataCollector_News
 # from kdnn_realData import dataCollector_Pubmed
-# import dataGenerator
+import dataGenerator
 
 ############## algorithms ##############
 from kdnn_realData import KDNN_Entropy_Greedy
@@ -29,24 +29,24 @@ if __name__ == "__main__":
     # fTypes = dataCollector_Yelp.allCategories
     # userAddr = [(35.04728681, -80.99055881)]  # input user location
 
-    ############## News #################
-    pSets = dataCollector_News.allPoints
-    fTypes = dataCollector_News.allCategories
-    # userAddr = [(-12.97221841, -38.50141361)]  # input user location
+    # ############## News #################
+    # pSets = dataCollector_News.allPoints
+    # fTypes = dataCollector_News.allCategories
+    # # userAddr = [(-12.97221841, -38.50141361)]  # input user location
 
     # ############## Publication #################
     # pSets = dataCollector_Pubmed.allPoints
     # fTypes = dataCollector_Pubmed.allCategories
     # userAddr = [(52.15714851, 4.4852091)]  # input user location
 
-    # ############## Synthetic Data #################
-    # x, y = 0, 0
-    # userAddr = [(x, y)]  # input user location
-    # numRecords = 100
-    # searchRange = 500
-    # cateNum = 10
-    # cateRange = 200
-    # pSets, fTypes = dataGenerator.randomData(numRecords, searchRange, x, y, cateNum, cateRange)
+    ############## Synthetic Data #################
+    x, y = 0, 0
+    userAddr = [(x, y)]  # input user location
+    numRecords = 100
+    searchRange = 500
+    cateNum = 10
+    cateRange = 200
+    pSets, fTypes = dataGenerator.randomData(numRecords, searchRange, x, y, cateNum, cateRange)
 
     for i in range(1):
         datasetRange = 20
@@ -67,7 +67,7 @@ if __name__ == "__main__":
             ftWW.append((allFt[j], preWeight[j]))
 
         # select an algorithm for kdnn
-        neighbors = KDNN_Union_Optimal.knn(pSets[:datasetRange], fTypes, id,
+        neighbors = KDNN_Entropy_Greedy.knn(pSets[:datasetRange], fTypes, id,
                                             k, ftWW)  # start from p0, collect all 6 nearest restaurant
         print('\n\n######################## Non Dominated #################################')
         for nd in neighbors:
