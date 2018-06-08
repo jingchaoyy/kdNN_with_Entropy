@@ -15,28 +15,33 @@ In a way, it provides all non-dominated sets
 
 
 # same as KDNN_Greedy
-def knn(pS, fTs, pLatLon, k):
-    newpS = pLatLon + pS  # adding user location to the list
-    X = np.array(newpS)
+def knn(pS, fTs, pid, k):
+    # newpS = pLatLon + pS  # adding user location to the list
+    X = np.array(pS)
     neighborsAfter = []  # Storing neighbors after each time getting neighbor check and switched
 
     # looking for knn one by one
     nonDominated = []
-    for i in range(len(newpS) + 1):
-        if i > 1:  # at least two nearest neighbor (i.e. [0] --> user)
+    lastNbors = 0  # record the original nbor set for last iteration
+    for i in range(len(pS) + 1):
+        if i > 0:  # at least two nearest neighbor (i.e. [0] --> user)
             nbrs = NearestNeighbors(n_neighbors=i, algorithm='ball_tree').fit(X)
             # return distances and ranked neighbors (presented as point location in array points)
             distances, neighbors = nbrs.kneighbors(X)
             # retrieving neighbors for user point
-            targetPNbrs = neighbors[0]
-            targetDistances = distances[0]
+            targetPNbrs = neighbors[pid]
+            targetDistances = distances[pid]
 
-            tnList = list(targetPNbrs)[1:]  # starting from the second one, first one is the user itself
-            tdList = list(targetDistances)[1:]
+            tnList = list(targetPNbrs)  # starting from the second one, first one is the user itself
+            tdList = list(targetDistances)
 
             # adding the latest neighbor to the adjusted neighbor list, total will always be k+1
-            neighborsAfter.append(tnList[len(tnList) - 1:len(tnList)][0])
-            print('\nOriginal', assignFT(fTs, neighborsAfter))
+            if lastNbors != 0:
+                neighborsAfter.append(list(set(tnList) - set(lastNbors))[0])
+            else:
+                neighborsAfter.append(tnList[0])
+            print('Original', neighborsAfter)
+            print('Original', assignFT(fTs, neighborsAfter))
 
             # when more than k neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list
@@ -58,7 +63,8 @@ def knn(pS, fTs, pLatLon, k):
 
                 print('Adjusted', assignFT(fTs, neighborsAfter))
                 print('nondominated neighbor set:', neighborsAfter)
-                if nonDominated[-1][0] != neighborsAfter[:k]:  # see if the last added nonDominated sets is tha same
+                if set(nonDominated[-1][0]) != set(
+                        neighborsAfter):  # see if the last added nonDominated sets is tha same
                     # as the latest one, if the same, ignore the latest one
                     nonDominated.append((neighborsAfter[:k], maxDist, divAfter, runT))
 
@@ -73,10 +79,12 @@ def knn(pS, fTs, pLatLon, k):
                     for att in atts:
                         for a in att:
                             attSets.append(a)
-                    diversity = len(Remove(attSets))
+                    diversity = diversity = len(Remove(attSets))
                     runTEnd1 = time.time()
                     runT1 = runTEnd1 - runTStart1  # get the runtime
                     nonDominated.append((neighborsAfter[:k], maxDisttd, diversity, runT1))
+
+            lastNbors = tnList
 
     print('\n\n######################## Original Vs. Final Results #################################')
     print('Original Neighbors:', tnList)
@@ -96,8 +104,7 @@ def assignFT(fTs, nbors):
     neighborTypes = []
     # assign each neighbor with their color type
     for n in nbors:
-        neighborTypes.append(
-            fTs[n - 1])  # n - 1 due to the sequence all push back by 1 after adding user location to the locationlist
+        neighborTypes.append(fTs[n])
     return neighborTypes
 
 
