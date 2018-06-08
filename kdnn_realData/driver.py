@@ -49,7 +49,8 @@ if __name__ == "__main__":
     # pSets, fTypes = dataGenerator.randomData(numRecords, searchRange, x, y, cateNum, cateRange)
 
     for i in range(1):
-        id = random.randint(0, 50)
+        datasetRange = 20
+        id = random.randint(0, datasetRange)
         getLoc = pSets[id]
         print(id, getLoc)
 
@@ -66,7 +67,7 @@ if __name__ == "__main__":
             ftWW.append((allFt[j], preWeight[j]))
 
         # select an algorithm for kdnn
-        neighbors = KDNN_Entropy_Greedy.knn(pSets[:50], fTypes, id,
+        neighbors = KDNN_Union_Optimal.knn(pSets[:datasetRange], fTypes, id,
                                             k, ftWW)  # start from p0, collect all 6 nearest restaurant
         print('\n\n######################## Non Dominated #################################')
         for nd in neighbors:
