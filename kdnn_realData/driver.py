@@ -22,7 +22,7 @@ import random
 if __name__ == "__main__":
     tStart = time.time()
 
-    k = 6  # Num of neighbors
+    kk = 6  # Num of neighbors
 
     # ############## Yelp #################
     # pSets = dataCollector_Yelp.allPoints
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     cateRange = 200
     pSets, fTypes = dataGenerator.randomData(numRecords, searchRange, x, y, cateNum, cateRange)
 
-    for i in range(1):
+    for i in range(20):
         datasetRange = 20
         id = random.randint(0, datasetRange)
         getLoc = pSets[id]
@@ -59,16 +59,16 @@ if __name__ == "__main__":
             for ft in ftSet:
                 allFt.append(ft)
         allFt = KDNN_Union_Greedy.Remove(allFt)  # ft without duplicate
-        for i in range(len(allFt)):
+        for j in range(len(allFt)):
             preWeight.append(random.uniform(0, 1))
 
         ftWW = []  # bound ft with weight
-        for j in range(len(allFt)):
-            ftWW.append((allFt[j], preWeight[j]))
+        for k in range(len(allFt)):
+            ftWW.append((allFt[k], preWeight[k]))
 
         # select an algorithm for kdnn
         neighbors = KDNN_Entropy_Greedy.knn(pSets[:datasetRange], fTypes, id,
-                                            k, ftWW)  # start from p0, collect all 6 nearest restaurant
+                                            kk, ftWW)  # start from p0, collect all 6 nearest restaurant
         print('\n\n######################## Non Dominated #################################')
         for nd in neighbors:
             print('(Nbor, Dist, Div, RT): ', nd)
