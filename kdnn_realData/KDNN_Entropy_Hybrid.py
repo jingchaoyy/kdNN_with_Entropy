@@ -17,9 +17,9 @@ choose k that ranked as the highest
 """
 
 
-def knn(pS, fTs, pLatLon, k):
-    newpS = pLatLon + pS  # adding user location to the list
-    X = np.array(newpS)
+def knn(pS, fTs, pid, k):
+    # newpS = pLatLon + pS  # adding user location to the list
+    X = np.array(pS)
     nonDominated = []
     for i in range(len(pS) + 1):
         if i > 1:  # at least one nearest neighbor (i.e. itself)
@@ -27,13 +27,13 @@ def knn(pS, fTs, pLatLon, k):
             # return distances and ranked neighbors (presented as point location in array points)
             distances, neighbors = nbrs.kneighbors(X)
             # retrieving neighbors for target point
-            targetPNbrs = neighbors[0]
-            targetDistances = distances[0]
+            targetPNbrs = neighbors[pid]
+            targetDistances = distances[pid]
 
-            tnList = list(targetPNbrs)[1:]  # starting from the second one, first one is the user itself
+            tnList = list(targetPNbrs)  # starting from the second one, first one is the user itself
             print("\nOriginal NID", tnList)
             print('Original', assignFT(fTs, tnList))
-            tdList = list(targetDistances)[1:]
+            tdList = list(targetDistances)
 
             # when more than k neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list
@@ -45,7 +45,6 @@ def knn(pS, fTs, pLatLon, k):
                 neighborsAfter = resultNbor[0]  # set of neighbors
                 divAfter = resultNbor[1]  # entropy of the neighbor set
                 runT = runTEnd - runTStart  # get the runtime
-
 
                 print('Adjusted NID', neighborsAfter)
                 print('Adjusted', assignFT(fTs, neighborsAfter))
@@ -61,24 +60,25 @@ def knn(pS, fTs, pLatLon, k):
                 if len(tnList) == k:
                     nonDominated.append((neighborsAfter, maxDist, divAfter, runT))
 
-                elif nonDominated[-1][0] != neighborsAfter:  # see if the last added nonDominated sets is tha same
+                elif set(nonDominated[-1][0]) != set(
+                        neighborsAfter):  # see if the last added nonDominated sets is tha same
                     # as the latest one, if the same, ignore the latest one
                     nonDominated.append((neighborsAfter, maxDist, divAfter, runT))
 
-            # else:  # when less than minimum required neighbors found, add to the neighbor list directly
-            #     # print('nondominated neighbor set:', targetPNbrs)
-            #     if len(tnList) == k:  # add the first find knn set to the nonDominated list
-            #         maxDisttd = max(tdList)
-            #         runTStart1 = time.time()
-            #         atts = assignFT(fTs, tnList)
-            #         attSets = []
-            #         for att in atts:
-            #             for a in att:
-            #                 attSets.append(a)
-            #         diversity = entropy.calcShannonEnt(attSets)
-            #         runTEnd1 = time.time()
-            #         runT1 = runTEnd1 - runTStart1  # get the runtime
-            #         nonDominated.append((neighborsAfter[:k], maxDisttd, diversity, runT1))runT1
+                    # else:  # when less than minimum required neighbors found, add to the neighbor list directly
+                    #     # print('nondominated neighbor set:', targetPNbrs)
+                    #     if len(tnList) == k:  # add the first find knn set to the nonDominated list
+                    #         maxDisttd = max(tdList)
+                    #         runTStart1 = time.time()
+                    #         atts = assignFT(fTs, tnList)
+                    #         attSets = []
+                    #         for att in atts:
+                    #             for a in att:
+                    #                 attSets.append(a)
+                    #         diversity = entropy.calcShannonEnt(attSets)
+                    #         runTEnd1 = time.time()
+                    #         runT1 = runTEnd1 - runTStart1  # get the runtime
+                    #         nonDominated.append((neighborsAfter[:k], maxDisttd, diversity, runT1))runT1
 
     return nonDominated
 
@@ -92,7 +92,7 @@ def assignFT(fTs, nbors):
     neighborTypes = []
     # assign each neighbor with their color type
     for n in nbors:
-        neighborTypes.append(fTs[n - 1])
+        neighborTypes.append(fTs[n])
     return neighborTypes
 
 
@@ -118,13 +118,13 @@ def checkNeighbor(fTs, nbors, kk):
     weights = entropyGetWeight.calcShannonEnt(ftList)[1]
 
     div = []  # list for recording total entropy of each neighbor, and related neighbor
-    for i in knnT:
+    for i in range(len(knnT)):
         iEntropy = 0  # for recording the entropy of neighbor i
-        for j in i:
+        for j in knnT[i]:
             for k in weights:
                 if j in k:  # assign weight of categories to each category in that neighbor
                     iEntropy += k[1]
-        div.append((iEntropy, nbors[knnT.index(i)]))
+        div.append((iEntropy, nbors[i]))
     print("divOriginal", div)
 
     # div.sort(reverse=True)
