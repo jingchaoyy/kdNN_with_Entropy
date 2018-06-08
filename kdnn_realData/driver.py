@@ -49,17 +49,25 @@ if __name__ == "__main__":
     # pSets, fTypes = dataGenerator.randomData(numRecords, searchRange, x, y, cateNum, cateRange)
 
     for i in range(1):
-        id = random.randint(0,50)
-        print(id)
-        # print(pSets)
-        # getLoc = pSets[id]
-        # print(id, getLoc)
-        # userAddr = [(getLoc[0] + 1 / 100000000, getLoc[1] + 1 / 100000000)]
-        userAddr = [(-12.97221841, -38.50141361)]  # input user location
+        id = random.randint(0, 50)
+        getLoc = pSets[id]
+        print(id, getLoc)
+
+        allFt, preWeight = [], []
+        for ftSet in fTypes:  # get all fts (with duplicates)
+            for ft in ftSet:
+                allFt.append(ft)
+        allFt = KDNN_Union_Greedy.Remove(allFt)  # ft without duplicate
+        for i in range(len(allFt)):
+            preWeight.append(random.uniform(0, 1))
+
+        ftWW = []  # bound ft with weight
+        for j in range(len(allFt)):
+            ftWW.append((allFt[j], preWeight[j]))
 
         # select an algorithm for kdnn
-        neighbors = KDNN_Entropy_Greedy.knn(pSets[:50], fTypes, userAddr,
-                                            k)  # start from p0, collect all 6 nearest restaurant
+        neighbors = KDNN_Entropy_Greedy.knn(pSets[:50], fTypes, id,
+                                            k, ftWW)  # start from p0, collect all 6 nearest restaurant
         print('\n\n######################## Non Dominated #################################')
         for nd in neighbors:
             print('(Nbor, Dist, Div, RT): ', nd)
