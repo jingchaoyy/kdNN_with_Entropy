@@ -23,6 +23,9 @@ if __name__ == "__main__":
     tStart = time.time()
 
     kk = 6  # Num of neighbors
+    datasetRange = 20
+
+    loops = 100
 
     # ############## Yelp #################
     # pSets = dataCollector_Yelp.allPoints
@@ -48,11 +51,10 @@ if __name__ == "__main__":
     cateRange = 200
     pSets, fTypes = dataGenerator.randomData(numRecords, searchRange, x, y, cateNum, cateRange)
 
-    for i in range(20):
-        datasetRange = 20
-        id = random.randint(0, datasetRange)
+    for i in range(loops):
+        id = random.randint(0, datasetRange-1)
         getLoc = pSets[id]
-        print(id, getLoc)
+        print('\n@@@@@@@@@@@@ User ID/Location', id, getLoc, '@@@@@@@@@@@@')
 
         allFt, preWeight = [], []
         for ftSet in fTypes:  # get all fts (with duplicates)
