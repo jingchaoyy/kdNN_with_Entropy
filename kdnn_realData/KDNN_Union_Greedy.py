@@ -15,8 +15,13 @@ In a way, it provides all non-dominated sets
 
 
 # same as KDNN_Greedy
-def knn(pS, fTs, pid, k):
-    # newpS = pLatLon + pS  # adding user location to the list
+def knn(pS, fTs, pid, k, wFTs):
+    # pS: all latlons
+    # fTs: all fTs associated with pS
+    # pid: user location, represented by restaurant ID
+    # k: number of nbors
+    # wFTs: set combine fTs with weight
+
     X = np.array(pS)
     neighborsAfter = []  # Storing neighbors after each time getting neighbor check and switched
 
@@ -40,7 +45,7 @@ def knn(pS, fTs, pid, k):
                 neighborsAfter.append(list(set(tnList) - set(lastNbors))[0])
             else:
                 neighborsAfter.append(tnList[0])
-            print('Original', neighborsAfter)
+            print('\nOriginal', neighborsAfter)
             print('Original', assignFT(fTs, neighborsAfter))
 
             # when more than k neighbors found, check if a switch of the last two can improve the diversity,
@@ -48,7 +53,7 @@ def knn(pS, fTs, pid, k):
             if len(neighborsAfter) > k:
 
                 runTStart = time.time()
-                resultNbor = checkNeighbor(fTs, neighborsAfter)
+                resultNbor = checkNeighbor(fTs, neighborsAfter, wFTs)
                 runTEnd = time.time()
                 neighborsAfter = resultNbor[0]  # set of neighbors
                 divAfter = resultNbor[1]  # entropy of the neighbor set
@@ -79,7 +84,9 @@ def knn(pS, fTs, pid, k):
                     for att in atts:
                         for a in att:
                             attSets.append(a)
-                    diversity = diversity = len(Remove(attSets))
+
+                    attSets = Remove(attSets)
+                    diversity = assignWeight(attSets, wFTs)
                     runTEnd1 = time.time()
                     runT1 = runTEnd1 - runTStart1  # get the runtime
                     nonDominated.append((neighborsAfter[:k], maxDisttd, diversity, runT1))
@@ -93,6 +100,20 @@ def knn(pS, fTs, pid, k):
     print('Final Food Type Rank:', assignFT(fTs, neighborsAfter))
 
     return nonDominated
+
+
+""" Function for assigning weight to atts, and get
+total weight (diversity) for the attSet"""
+
+
+def assignWeight(attSet, wFTs):
+    wts = []
+    for att in attSet:
+        for wft in wFTs:
+            if att in wft:
+                wts.append(wft[1])
+    totalWeight = sum(wts)
+    return totalWeight
 
 
 """ Function defined to output all neighbors with 
@@ -124,7 +145,7 @@ based on the entropy calculated
 """
 
 
-def checkNeighbor(fTs, nbors):
+def checkNeighbor(fTs, nbors, wFTs):
     # assign food type to all the neighbors first
     knnT = assignFT(fTs, nbors)
     # calculating the diversity without the newly added neighbor
@@ -140,8 +161,8 @@ def checkNeighbor(fTs, nbors):
             for y in z:
                 sets.append(y)
 
-        fList = Remove(sets)
-        diversity = len(fList)
+        sets1 = Remove(sets)
+        diversity = assignWeight(sets1, wFTs)
         div.append(diversity)
         print(sets)
         print(diversity)
