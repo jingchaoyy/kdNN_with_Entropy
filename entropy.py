@@ -4,11 +4,12 @@ Date: Apr.1 2018
 """
 from math import log
 
-def calcShannonEnt(dataSet):
+
+def calcShannonEnt(dataSet, wFTs):
     countDataSet = len(dataSet)
-    typeCounts={}
+    typeCounts = {}
     for restaurant in dataSet:
-        currentLabel=restaurant
+        currentLabel = restaurant
         if currentLabel not in typeCounts.keys():
             typeCounts[currentLabel] = 0
         typeCounts[currentLabel] += 1
@@ -18,9 +19,12 @@ def calcShannonEnt(dataSet):
     shannonEnt = 0.0
 
     for type in typeCounts:
-        prob = float(typeCounts[type])/countDataSet
+        prob = float(typeCounts[type]) / countDataSet
+        for wft in wFTs:
+            if type in wft[0]:
+                wt = wft[1]
         # print prob
-        shannonEnt -= log(prob,2)
+        shannonEnt -= wt * log(prob, 2)
 
     return shannonEnt
 
@@ -49,4 +53,3 @@ def calcShannonEnt(dataSet):
 # print calcShannonEnt(dataSet6) - 0.2
 # print calcShannonEnt(dataSet7) - 0.1
 # print calcShannonEnt(dataSet8) - 0.1
-
