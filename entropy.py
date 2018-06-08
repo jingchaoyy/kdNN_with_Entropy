@@ -21,7 +21,7 @@ def calcShannonEnt(dataSet, wFTs):
     for type in typeCounts:
         prob = float(typeCounts[type]) / countDataSet
         for wft in wFTs:
-            if type in wft[0]:
+            if type in wft:
                 wt = wft[1]
         # print prob
         shannonEnt -= wt * log(prob, 2)
