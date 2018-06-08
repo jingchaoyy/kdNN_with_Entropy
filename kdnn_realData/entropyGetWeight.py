@@ -7,7 +7,7 @@ Created on 5/27/18
 from math import log
 
 
-def calcShannonEnt(dataSet):
+def calcShannonEnt(dataSet, wFTs):
     countDataSet = len(dataSet)
     typeCounts = {}
     for restaurant in dataSet:
@@ -22,12 +22,15 @@ def calcShannonEnt(dataSet):
     wList = []
     for type in typeCounts:
         prob = float(typeCounts[type]) / countDataSet
-        weight = log(prob, 2)
+        for wft in wFTs:
+            if type in wft:
+                wt = wft[1]
+
+        weight = wt * log(prob, 2)
         wList.append((type, abs(weight)))
         shannonEnt -= log(prob, 2)
 
     return shannonEnt, wList
-
 
 # dataSet1 = ['Chinese', 'Chinese']
 # dataSet2 = ['Chinese', 'Japanese']

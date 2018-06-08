@@ -17,8 +17,13 @@ choose k that ranked as the highest
 """
 
 
-def knn(pS, fTs, pid, k):
-    # newpS = pLatLon + pS  # adding user location to the list
+def knn(pS, fTs, pid, k, wFTs):
+    # pS: all latlons
+    # fTs: all fTs associated with pS
+    # pid: user location, represented by restaurant ID
+    # k: number of nbors
+    # wFTs: set combine fTs with weight
+
     X = np.array(pS)
     nonDominated = []
     for i in range(len(pS) + 1):
@@ -40,7 +45,7 @@ def knn(pS, fTs, pid, k):
             if len(tnList) >= k:
 
                 runTStart = time.time()
-                resultNbor = checkNeighbor(fTs, tnList, k)
+                resultNbor = checkNeighbor(fTs, tnList, k, wFTs)
                 runTEnd = time.time()
                 neighborsAfter = resultNbor[0]  # set of neighbors
                 divAfter = resultNbor[1]  # entropy of the neighbor set
@@ -106,7 +111,7 @@ entropy, and output k restaurants with highest entropy value
 """
 
 
-def checkNeighbor(fTs, nbors, kk):
+def checkNeighbor(fTs, nbors, kk, wFTs):
     # assign food type to all the neighbors first
     knnT = assignFT(fTs, nbors)
 
@@ -115,7 +120,7 @@ def checkNeighbor(fTs, nbors, kk):
         for y in x:
             ftList.append(y)
 
-    weights = entropyGetWeight.calcShannonEnt(ftList)[1]
+    weights = entropyGetWeight.calcShannonEnt(ftList, wFTs)[1]
 
     div = []  # list for recording total entropy of each neighbor, and related neighbor
     for i in range(len(knnT)):
