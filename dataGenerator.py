@@ -12,7 +12,7 @@ def randomData(num=100, radius=500, query_x=0, query_y=0, catNum=5, catRange=26)
     # radius: Range of query
     # query_lat, query_lng: Location of query point
     # catNum: max Number of categories for each entry
-    # catRange: Range of categories
+    # catRange: types of categories
     allCategories = []
     allPoints = []
     # catSum = list(string.ascii_uppercase)
