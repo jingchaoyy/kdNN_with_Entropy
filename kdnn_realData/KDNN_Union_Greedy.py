@@ -40,6 +40,7 @@ def knn(pS, fTs, pid, k, wFTs):
             tnList = list(targetPNbrs)  # starting from the second one, first one is the user itself
             tdList = list(targetDistances)
 
+            maxDist = max(tdList)  # max distance within all found neighbors (search range)
             # adding the latest neighbor to the adjusted neighbor list, total will always be k+1
             if lastNbors != 0:
                 neighborsAfter.append(list(set(tnList) - set(lastNbors))[0])
@@ -64,14 +65,16 @@ def knn(pS, fTs, pid, k, wFTs):
                     if na in tnList:
                         ind = tnList.index(na)
                         distanceAfter.append(tdList[ind])
-                maxDist = max(distanceAfter)
+                # maxDist = max(distanceAfter)
 
                 print('Adjusted', assignFT(fTs, neighborsAfter))
                 print('nondominated neighbor set:', neighborsAfter)
-                if set(nonDominated[-1][0]) != set(
-                        neighborsAfter):  # see if the last added nonDominated sets is tha same
-                    # as the latest one, if the same, ignore the latest one
-                    nonDominated.append((neighborsAfter[:k], maxDist, divAfter, runT))
+                # if set(nonDominated[-1][0]) != set(
+                #         neighborsAfter):  # see if the last added nonDominated sets is tha same
+                #     # as the latest one, if the same, ignore the latest one
+                #     nonDominated.append((neighborsAfter[:k], maxDist, divAfter, runT))
+
+                nonDominated.append([maxDist, divAfter, runT])  # collect all after each iteration
 
             else:  # when less than minimum required neighbors found, add to the neighbor list directly
                 neighborsAfter = neighborsAfter
@@ -89,7 +92,7 @@ def knn(pS, fTs, pid, k, wFTs):
                     diversity = assignWeight(attSets, wFTs)
                     runTEnd1 = time.time()
                     runT1 = runTEnd1 - runTStart1  # get the runtime
-                    nonDominated.append((neighborsAfter[:k], maxDisttd, diversity, runT1))
+                    nonDominated.append([maxDisttd, diversity, runT1])
 
             lastNbors = tnList
 

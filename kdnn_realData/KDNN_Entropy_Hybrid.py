@@ -40,6 +40,8 @@ def knn(pS, fTs, pid, k, wFTs):
             print('Original', assignFT(fTs, tnList))
             tdList = list(targetDistances)
 
+            maxDist = max(tdList)  # max distance within all found neighbors (search range)
+
             # when more than k neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list
             if len(tnList) >= k:
@@ -60,30 +62,17 @@ def knn(pS, fTs, pid, k, wFTs):
                     if na in tnList:
                         ind = tnList.index(na)
                         distanceAfter.append(tdList[ind])
-                maxDist = max(distanceAfter)
+                # maxDist = max(distanceAfter)
 
-                if len(tnList) == k:
-                    nonDominated.append((neighborsAfter, maxDist, divAfter, runT))
+                # if len(tnList) == k:
+                #     nonDominated.append((neighborsAfter, maxDist, divAfter, runT))
+                #
+                # elif set(nonDominated[-1][0]) != set(
+                #         neighborsAfter):  # see if the last added nonDominated sets is tha same
+                #     # as the latest one, if the same, ignore the latest one
+                #     nonDominated.append((neighborsAfter, maxDist, divAfter, runT))
 
-                elif set(nonDominated[-1][0]) != set(
-                        neighborsAfter):  # see if the last added nonDominated sets is tha same
-                    # as the latest one, if the same, ignore the latest one
-                    nonDominated.append((neighborsAfter, maxDist, divAfter, runT))
-
-                    # else:  # when less than minimum required neighbors found, add to the neighbor list directly
-                    #     # print('nondominated neighbor set:', targetPNbrs)
-                    #     if len(tnList) == k:  # add the first find knn set to the nonDominated list
-                    #         maxDisttd = max(tdList)
-                    #         runTStart1 = time.time()
-                    #         atts = assignFT(fTs, tnList)
-                    #         attSets = []
-                    #         for att in atts:
-                    #             for a in att:
-                    #                 attSets.append(a)
-                    #         diversity = entropy.calcShannonEnt(attSets)
-                    #         runTEnd1 = time.time()
-                    #         runT1 = runTEnd1 - runTStart1  # get the runtime
-                    #         nonDominated.append((neighborsAfter[:k], maxDisttd, diversity, runT1))runT1
+                nonDominated.append([maxDist, divAfter, runT])
 
     return nonDominated
 

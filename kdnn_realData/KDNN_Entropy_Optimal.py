@@ -38,6 +38,8 @@ def knn(pS, fTs, pid, k, wFTs):
             tnList = list(targetPNbrs)
             tdList = list(targetDistances)
 
+            maxDist = max(tdList)  # max distance within all found neighbors (search range)
+
             print('\nOriginal NID', tnList)
             print('Original', assignFT(fTs, tnList))
 
@@ -59,25 +61,21 @@ def knn(pS, fTs, pid, k, wFTs):
                     if na in tnList:
                         ind = tnList.index(na)
                         distanceAfter.append(tdList[ind])
-                maxDist = max(distanceAfter)
+                # maxDist = max(distanceAfter)  # max distance within selected neighbor
 
                 print('Adjusted NID', neighborsAfter)
                 print('Adjusted', assignFT(fTs, neighborsAfter))
                 print('nondominated neighbor set:', (neighborsAfter[:k], maxDist))
 
-                if len(tnList) == k:
-                    nonDominated.append((neighborsAfter, maxDist, divAfter, runT))
+                # if len(tnList) == k:
+                #     nonDominated.append((neighborsAfter, maxDist, divAfter, runT))
+                #
+                # elif set(nonDominated[-1][0]) != set(
+                #         neighborsAfter):  # see if the last added nonDominated sets is tha same
+                #     # as the latest one, if the same, ignore the latest one
+                #     nonDominated.append((neighborsAfter, maxDist, divAfter, runT))
 
-                elif set(nonDominated[-1][0]) != set(
-                        neighborsAfter):  # see if the last added nonDominated sets is tha same
-                    # as the latest one, if the same, ignore the latest one
-                    nonDominated.append((neighborsAfter, maxDist, divAfter, runT))
-
-                    # else:  # when less than minimum required neighbors found, add to the neighbor list directly
-                    #     print('nondominated neighbor set:', tnList)
-                    #     if len(tnList) == k:  # add the first find knn set to the nonDominated list
-                    #         maxDisttd = max(tdList)
-                    #         nonDominated.append((tnList, maxDisttd))
+                nonDominated.append([maxDist, divAfter, runT])
 
     print('\n\n######################## Original Vs. Final Results #################################')
     print('Original Neighbors:', tnList)
