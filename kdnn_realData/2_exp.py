@@ -59,11 +59,11 @@ if __name__ == "__main__":
     for i in range(len(algorithms)):
         resultPool = []
         runtimes = []
-        for m in range(datasetRange):
-            if m >1:
+        for n in range(datasetRange):
+            if n >1:
                 tStart = time.time()
                 for j in range(loops):
-                    id = random.randint(0, m - 1)
+                    id = random.randint(0, n - 1)
                     getLoc = pSets[id]
                     print('\n@@@@@@@@@@@@ User ID/Location', id, getLoc, '@@@@@@@@@@@@')
 
@@ -80,7 +80,7 @@ if __name__ == "__main__":
                         ftWW.append((allFt[k], preWeight[k]))
 
                     # select an algorithm for kdnn
-                    neighbors = algorithms[i].knn(pSets[:m], fTypes, id,
+                    neighbors = algorithms[i].knn(pSets[:n], fTypes, id,
                                                   kk, ftWW)  # start from p0, collect all 6 nearest restaurant
 
 
