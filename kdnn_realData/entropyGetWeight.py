@@ -26,7 +26,7 @@ def calcShannonEnt(dataSet, wFTs):
             if type in wft:
                 wt = wft[1]
 
-        weight = wt * log(prob, 2)
+        weight = wt * log(prob, 2) / typeCounts[type]
         wList.append((type, abs(weight)))
         shannonEnt -= log(prob, 2)
 
