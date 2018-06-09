@@ -46,7 +46,7 @@ def dataPre(filePath):
     # Collecting restaurants in a specific state
     restaurants = []
     for RS in allRest:
-        if RS.sta == 'SC':
+        if RS.sta == 'AZ':
             restaurants.append(RS)
 
     return restaurants
@@ -60,4 +60,4 @@ for i in restsInST:
     allCategories.append(i.categor)
     # print(i.name, i.xy, i.categor)
 
-# print('Total', len(allPoints), 'restaurants tested')
+print('Total', len(allPoints), 'restaurants tested')
