@@ -19,6 +19,7 @@ from kdnn_realData import KDNN_Union_Optimal
 import time
 import random
 import numpy as np
+import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
     tStart = time.time()
@@ -83,7 +84,17 @@ if __name__ == "__main__":
     print('       Dist         Diversity       Runtime')
     resultPool = np.array(resultPool)
     resultPool = resultPool.sum(axis=0)  # sum by columns
-    print(resultPool / loops)  # all get average
+    avg = resultPool / loops  # all get average
+    print(avg)
 
-tEnd = time.time()
-print("\nTotal time: ", tEnd - tStart, "seconds")
+    X = avg[:,0]  # Dist
+    Y = avg[:,1]  # Diversity
+    Z = avg[:,2]  # Runtime
+
+    plt.plot(X,Y)
+    plt.xlabel("Distance")
+    plt.ylabel("Diversity")
+    plt.show()
+
+    tEnd = time.time()
+    print("\nTotal time: ", tEnd - tStart, "seconds")
