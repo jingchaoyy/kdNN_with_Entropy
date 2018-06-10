@@ -53,7 +53,7 @@ def dataPre(filePath):
 
 
 # restaurants in AZ with coordinates from original datasets
-restsInST = dataPre("/yelpData/business.json")
+restsInST = dataPre("/Data/business.json")
 allPoints, allCategories = [], []
 for i in restsInST:
     allPoints.append(i.xy)

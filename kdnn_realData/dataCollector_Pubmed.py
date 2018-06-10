@@ -5,7 +5,7 @@ Created on 6/5/18
 """
 import pandas as pd
 
-allNews = pd.read_csv('yelpData/pubmed_Separate.csv')
+allNews = pd.read_csv('Data/pubmed_Separate.csv')
 
 categories = allNews['CATEGORY']
 lat, lon = allNews['LAT'], allNews['LON']
