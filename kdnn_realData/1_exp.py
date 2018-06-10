@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     kk = 6  # Num of neighbors
     datasetRange = 20
-    loops = 10
+    loops = 5
 
     # ############## Yelp #################
     # pSets = dataCollector_Yelp.allPoints
@@ -56,9 +56,10 @@ if __name__ == "__main__":
     labels = ["Entropy_Greedy", "Entropy_Hybrid", "Entropy_Optimal"]
 
     preferences = []
-    users = range(0, datasetRange)
+    users = range(0, datasetRange)  # define users
+    userList = random.sample(users,loops)  # random pick users for loops number of times
 
-    for x in range(loops):  # generating preferences
+    for x in range(datasetRange):  # generating preferences
         allFt, preWeight = [], []
         for ftSet in fTypes:  # get all fts (with duplicates)
             for ft in ftSet:
@@ -82,7 +83,7 @@ if __name__ == "__main__":
 
         for j in range(loops):
             # select an algorithm for kdnn
-            neighbors = algorithms[i].knn(pSets[:datasetRange], fTypes, users[j], kk, preferences[j])
+            neighbors = algorithms[i].knn(pSets[:datasetRange], fTypes, userList[j], kk, preferences[userList[j]])
             resultPool.append(neighbors)
 
         print('\n\n######################## Non Dominated #################################')
