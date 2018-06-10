@@ -4,9 +4,9 @@ Created on 6/9/18
 @author: Jingchao Yang
 """
 ############## data source ##############
-# from kdnn_realData import dataCollector_Yelp
-# from kdnn_realData import dataCollector_News
-# from kdnn_realData import dataCollector_Pubmed
+from kdnn_realData import dataCollector_Yelp
+from kdnn_realData import dataCollector_News
+from kdnn_realData import dataCollector_Pubmed
 import dataGenerator
 
 ############## algorithms ##############
@@ -15,6 +15,7 @@ from kdnn_realData import KDNN_Entropy_Hybrid
 from kdnn_realData import KDNN_Entropy_Optimal
 from kdnn_realData import KDNN_Union_Greedy
 from kdnn_realData import KDNN_Union_Optimal
+import csv
 
 import time
 import random
@@ -22,84 +23,94 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
-  kk = 6  # Num of neighbors
-  datasetRange = 100
-  loops = 10
+    kk = 6  # Num of neighbors
+    datasetRange = 10
+    loops = 1
 
-  # ############## Yelp #################
-  # pSets = dataCollector_Yelp.allPoints
-  # fTypes = dataCollector_Yelp.allCategories
-  # userAddr = [(35.04728681, -80.99055881)]  # input user location
-  #
-  # ############## News #################
-  # pSets = dataCollector_News.allPoints
-  # fTypes = dataCollector_News.allCategories
-  # # userAddr = [(-12.97221841, -38.50141361)]  # input user location
+    ############## Yelp #################
+    pSets_yelp = dataCollector_Yelp.allPoints
+    fTypes_yelp = dataCollector_Yelp.allCategories
 
-  # ############## Publication #################
-  # pSets = dataCollector_Pubmed.allPoints
-  # fTypes = dataCollector_Pubmed.allCategories
-  # userAddr = [(52.15714851, 4.4852091)]  # input user location
+    ############## News #################
+    pSets_news = dataCollector_News.allPoints
+    fTypes_news = dataCollector_News.allCategories
 
-  ############# Synthetic Data #################
-  x, y = 0, 0
-  numRecords = 500
-  searchRange = 500
-  cateNum = 3  # 3, 5, 10
-  cateRange = 200
-  pSets, fTypes = dataGenerator.randomData(numRecords, searchRange, x, y, cateNum, cateRange)
+    # ############## Publication #################
+    pSets_pub = dataCollector_Pubmed.allPoints
+    fTypes_pub = dataCollector_Pubmed.allCategories
 
-  algorithms = [KDNN_Entropy_Greedy, KDNN_Entropy_Hybrid, KDNN_Entropy_Optimal]
-  colors = ['r', 'g', 'b']
-  labels = ["Entropy_Greedy", "Entropy_Hybrid", "Entropy_Optimal"]
+    ############# Synthetic Data #################
+    x, y = 0, 0
+    numRecords = 500
+    searchRange = 500
+    cateNum = 3  # 3, 5, 10
+    cateRange = 200
+    pSets_syn, fTypes_syn = dataGenerator.randomData(numRecords, searchRange, x, y, cateNum, cateRange)
 
-  preferences = []
-  users = range(0, datasetRange)
+    datasets = [pSets_yelp]
+    dataName = ['Yelp']
+    datasetsType = [fTypes_yelp, fTypes_news, fTypes_pub, fTypes_syn]
 
-  for x in range(loops):  # generating preferences
-      allFt, preWeight = [], []
-      for ftSet in fTypes:  # get all fts (with duplicates)
-          for ft in ftSet:
-              allFt.append(ft)
-      allFt = KDNN_Union_Greedy.Remove(allFt)  # ft without duplicate
-      for j in range(len(allFt)):
-          preWeight.append(random.uniform(0, 1))
+    algorithms = [KDNN_Entropy_Greedy, KDNN_Entropy_Hybrid, KDNN_Entropy_Optimal]
+    colors = ['r', 'g', 'b']
+    labels = ["Entropy_Greedy", "Entropy_Hybrid", "Entropy_Optimal"]
 
-      ftWW = []  # bound ft with weight
-      for k in range(len(allFt)):
-          ftWW.append((allFt[k], preWeight[k]))
+    users = range(datasetRange)
 
-      preferences.append(ftWW)
+    for ds in range(len(datasets)):
+        # print(k)
+        preferences = []
+        # fig, ax = plt.subplots()
+        for x in range(datasetRange):  # generating preferences
+            allFt, preWeight = [], []
+            for ftSet in datasetsType[ds]:  # get all fts (with duplicates)
+                for ft in ftSet:
+                    allFt.append(ft)
+            allFt = KDNN_Union_Greedy.Remove(allFt)  # ft without duplicate
+            for j in range(len(allFt)):
+                preWeight.append(random.uniform(0, 1))
 
-  fig, ax = plt.subplots()
+            ftWW = []  # bound ft with weight
+            for k in range(len(allFt)):
+                ftWW.append((allFt[k], preWeight[k]))
 
-  # for k in range(datasetRange):
-  for i in range(len(algorithms)):
-      if i == 2:
-          users = range(0, 20)
-          datasetRange = 20
+            preferences.append(ftWW)
 
-      resultPool = []
-      runtimes = []
-      for n in range(datasetRange):
-          if n > 1:
-              tStart = time.time()
-              for j in range(loops):
-                  users = users[:n]
-                  user = random.choice(users)
+        for i in range(len(algorithms)):
+            if i == 2:
+                users = range(0, 20)
+                datasetRange = 20
 
-                  # select an algorithm for kdnn
-                  neighbors = algorithms[i].knn(pSets[:n], fTypes, user, kk, preferences[user])
+            resultPool = []
+            runtimes = []
 
-              tEnd = time.time()
-              runtimes.append(tEnd - tStart)
+            for n in range(datasetRange):
+                if n > 1:
+                    tStart = time.time()
 
-      ax.plot(range(2, datasetRange), runtimes, colors[i], label=labels[i])
+                    for j in range(loops):
+                        users = users[:n]
+                        user = random.choice(users)
 
-  legend = ax.legend(loc='upper left', shadow=True, fontsize='large')
-  plt.title("Correlation Between Neighbor Size and Runtime")
-  plt.xlabel("Neighbor Size")
-  plt.ylabel("Runtime")
-  plt.show()
+                        # select an algorithm for kdnn
+                        neighbors = algorithms[i].knn(datasets[ds][:n], datasetsType[ds], user, kk, preferences[user])
+
+                    tEnd = time.time()
+                    runtimes.append(tEnd - tStart)
 
 
+            with open('/Users/YJccccc/kdNN_with_Entropy/kdnn_realData/results/exp2/' + dataName[ds] + labels[
+                i] + '.csv', 'w',
+                      newline='') as csvfile:
+                spamwriter = csv.writer(csvfile, delimiter=' ',
+                                        quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                print(runtimes)
+                for r in range(len(runtimes)):
+                    spamwriter.writerow([r+2, runtimes[r]])
+    #         ax.plot(range(2, datasetRange), runtimes, colors[i], label=labels[i])
+    #
+    # legend = ax.legend(loc='upper left', shadow=True, fontsize='large')
+    # plt.title("Correlation Between Neighbor Size and Runtime")
+    # plt.xlabel("Neighbor Size")
+    # plt.ylabel("Runtime")
+    # plt.show()

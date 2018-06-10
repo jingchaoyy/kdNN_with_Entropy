@@ -4,9 +4,9 @@ Created on 6/9/18
 @author: Jingchao Yang
 """
 ############## data source ##############
-# from kdnn_realData import dataCollector_Yelp
+from kdnn_realData import dataCollector_Yelp
 # from kdnn_realData import dataCollector_News
-from kdnn_realData import dataCollector_Pubmed
+# from kdnn_realData import dataCollector_Pubmed
 # import dataGenerator
 
 ############## algorithms ##############
@@ -20,28 +20,29 @@ import time
 import random
 import numpy as np
 import matplotlib.pyplot as plt
+import csv
 
 if __name__ == "__main__":
     tStart = time.time()
 
     kk = 6  # Num of neighbors
     datasetRange = 20
-    loops = 20
+    loops = 1
 
-    # ############## Yelp #################
-    # pSets = dataCollector_Yelp.allPoints
-    # fTypes = dataCollector_Yelp.allCategories
-    # userAddr = [(35.04728681, -80.99055881)]  # input user location
+    ############## Yelp #################
+    pSets = dataCollector_Yelp.allPoints
+    fTypes = dataCollector_Yelp.allCategories
+    userAddr = [(35.04728681, -80.99055881)]  # input user location
     #
     # ############## News #################
     # pSets = dataCollector_News.allPoints
     # fTypes = dataCollector_News.allCategories
     # # userAddr = [(-12.97221841, -38.50141361)]  # input user location
 
-    ############## Publication #################
-    pSets = dataCollector_Pubmed.allPoints
-    fTypes = dataCollector_Pubmed.allCategories
-    userAddr = [(52.15714851, 4.4852091)]  # input user location
+    # ############## Publication #################
+    # pSets = dataCollector_Pubmed.allPoints
+    # fTypes = dataCollector_Pubmed.allCategories
+    # userAddr = [(52.15714851, 4.4852091)]  # input user location
 
     # ############# Synthetic Data #################
     # x, y = 0, 0
@@ -71,7 +72,8 @@ if __name__ == "__main__":
 
         preferences.append(ftWW)
 
-    fig, ax = plt.subplots()
+    ############### Test run and csv write
+    # fig, ax = plt.subplots()
     for i in range(len(algorithms)):
         resultPool = []
         if i == 2:
@@ -94,13 +96,12 @@ if __name__ == "__main__":
         Y = avg[:, 1]  # Diversity
         Z = avg[:, 2]  # Runtime
 
-        ax.plot(X, Y, colors[i], label=labels[i])
 
-    legend = ax.legend(loc='upper left', shadow=True, fontsize='large')
-    plt.title("Correlation Between Distance and Diversity")
-    plt.xlabel("Distance")
-    plt.ylabel("Diversity")
-    plt.show()
+        with open('/Users/YJccccc/kdNN_with_Entropy/kdnn_realData/results/exp1'+labels[i]+'.csv', 'w', newline='') as csvfile:
+            spamwriter = csv.writer(csvfile, delimiter=' ',
+                                    quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            for r in avg:
+                spamwriter.writerow(r)
 
     tEnd = time.time()
     print("\nTotal time: ", tEnd - tStart, "seconds")
