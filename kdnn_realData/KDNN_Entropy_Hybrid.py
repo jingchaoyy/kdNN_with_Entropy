@@ -8,6 +8,7 @@ from sklearn.neighbors import NearestNeighbors
 import numpy as np
 from kdnn_realData import entropyGetWeight
 import time
+import entropy
 
 """ Entropy enabled knn
 Algorithm will compute the diversity/ entropy each time when a new neighbor added
@@ -50,11 +51,20 @@ def knn(pS, fTs, pid, k, wFTs):
                 resultNbor = checkNeighbor(fTs, tnList, k, wFTs)
                 runTEnd = time.time()
                 neighborsAfter = resultNbor[0]  # set of neighbors
-                divAfter = resultNbor[1]  # entropy of the neighbor set
+                # divAfter = resultNbor[1]  # entropy of the neighbor set
                 runT = runTEnd - runTStart  # get the runtime
 
                 print('Adjusted NID', neighborsAfter)
-                print('Adjusted', assignFT(fTs, neighborsAfter))
+                catAfter = assignFT(fTs, neighborsAfter)
+                print('Adjusted', catAfter)
+
+                catList = []
+                for a in catAfter:
+                    for b in a:
+                        catList.append(b)
+
+                divAfter = entropy.calcShannonEnt(catList, wFTs)
+
                 # print('nondominated neighbor set:', bestDiv)
 
                 distanceAfter = []
