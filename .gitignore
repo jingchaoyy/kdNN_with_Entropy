@@ -1,4 +1,6 @@
 
-#kdnn_realData/Data/
+kdnn_realData/Data/news.csv
+kdnn_realData/Data/pubmed.csv
+kdnn_realData/Data/*.json
 Possible_Result
 paper
