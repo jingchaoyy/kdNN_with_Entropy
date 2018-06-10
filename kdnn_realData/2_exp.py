@@ -7,7 +7,6 @@ Created on 6/9/18
 from kdnn_realData import dataCollector_Yelp
 from kdnn_realData import dataCollector_News
 from kdnn_realData import dataCollector_Pubmed
-import dataGenerator
 
 ############## algorithms ##############
 from kdnn_realData import KDNN_Entropy_Greedy
@@ -24,8 +23,8 @@ import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
     kk = 6  # Num of neighbors
-    datasetRange = 10
-    loops = 1
+    datasetRange = 50
+    loops = 10
 
     ############## Yelp #################
     pSets_yelp = dataCollector_Yelp.allPoints
@@ -39,21 +38,13 @@ if __name__ == "__main__":
     pSets_pub = dataCollector_Pubmed.allPoints
     fTypes_pub = dataCollector_Pubmed.allCategories
 
-    ############# Synthetic Data #################
-    x, y = 0, 0
-    numRecords = 500
-    searchRange = 500
-    cateNum = 3  # 3, 5, 10
-    cateRange = 200
-    pSets_syn, fTypes_syn = dataGenerator.randomData(numRecords, searchRange, x, y, cateNum, cateRange)
+    datasets = [pSets_yelp, pSets_news, pSets_pub]
+    dataName = ['Yelp', 'News', 'Pub']
+    datasetsType = [fTypes_yelp, fTypes_news, fTypes_pub]
 
-    datasets = [pSets_yelp]
-    dataName = ['Yelp']
-    datasetsType = [fTypes_yelp, fTypes_news, fTypes_pub, fTypes_syn]
-
-    algorithms = [KDNN_Entropy_Greedy, KDNN_Entropy_Hybrid, KDNN_Entropy_Optimal]
-    colors = ['r', 'g', 'b']
-    labels = ["Entropy_Greedy", "Entropy_Hybrid", "Entropy_Optimal"]
+    algorithms = [KDNN_Entropy_Greedy, KDNN_Entropy_Hybrid, KDNN_Entropy_Optimal, KDNN_Union_Greedy, KDNN_Union_Optimal]
+    # colors = ['r', 'g', 'b']
+    labels = ["Entropy_Greedy", "Entropy_Hybrid", "Entropy_Optimal", "Union_Greedy", "Union_Optimal"]
 
     users = range(datasetRange)
 
@@ -77,7 +68,7 @@ if __name__ == "__main__":
             preferences.append(ftWW)
 
         for i in range(len(algorithms)):
-            if i == 2:
+            if i == 2 or i == 4:
                 users = range(0, 20)
                 datasetRange = 20
 
