@@ -27,7 +27,7 @@ def knn(pS, fTs, pid, k, wFTs):
     X = np.array(pS)
     nonDominated = []
     targetPNbrs = ''
-    for i in range(len(pS) + 1):
+    for i in range(len(pS)):
         if i > 0:  # at least one nearest neighbor (i.e. itself)
             nbrs = NearestNeighbors(n_neighbors=i, algorithm='ball_tree').fit(X)
             # return distances and ranked neighbors (presented as point location in array points)
