@@ -82,7 +82,7 @@ def knn(pS, fTs, pid, k, wFTs):
                 #     # as the latest one, if the same, ignore the latest one
                 #     nonDominated.append((neighborsAfter, maxDist, divAfter, runT))
 
-                nonDominated.append([maxDist, divAfter, runT])
+                nonDominated.append([neighborsAfter,maxDist, divAfter, runT])
 
     return nonDominated
 
@@ -126,7 +126,7 @@ def checkNeighbor(fTs, nbors, kk, wFTs):
         iEntropy = 0  # for recording the entropy of neighbor i
         for j in knnT[i]:
             for k in weights:
-                if j in k:  # assign weight of categories to each category in that neighbor
+                if j == k[0]:  # assign weight of categories to each category in that neighbor
                     iEntropy += k[1]
         div.append((iEntropy, nbors[i]))
     print("divOriginal", div)

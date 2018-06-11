@@ -29,7 +29,7 @@ def knn(pS, fTs, pid, k, wFTs):
     # looking for knn one by one
     nonDominated = []
     lastNbors = 0  # record the original nbor set for last iteration
-    for i in range(len(pS)):
+    for i in range(len(pS) + 1):
         if i > 0:  # at least two nearest neighbor (i.e. [0] --> user)
             nbrs = NearestNeighbors(n_neighbors=i, algorithm='ball_tree').fit(X)
             # return distances and ranked neighbors (presented as point location in array points)
