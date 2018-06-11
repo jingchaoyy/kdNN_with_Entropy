@@ -4,10 +4,10 @@ Created on 6/9/18
 @author: Jingchao Yang
 """
 ############## data source ##############
-from kdnn_realData import dataCollector_Yelp
+# from kdnn_realData import dataCollector_Yelp
 # from kdnn_realData import dataCollector_News
 # from kdnn_realData import dataCollector_Pubmed
-# import dataGenerator
+import dataGenerator
 
 ############## algorithms ##############
 from kdnn_realData import KDNN_Entropy_Greedy
@@ -26,13 +26,13 @@ if __name__ == "__main__":
     tStart = time.time()
 
     kk = 6  # Num of neighbors
-    datasetRange = 20
-    loops = 1
+    datasetRange = 30
+    loops = 10
 
-    ############## Yelp #################
-    pSets = dataCollector_Yelp.allPoints
-    fTypes = dataCollector_Yelp.allCategories
-    userAddr = [(35.04728681, -80.99055881)]  # input user location
+    # ############## Yelp #################
+    # pSets = dataCollector_Yelp.allPoints
+    # fTypes = dataCollector_Yelp.allCategories
+    # userAddr = [(35.04728681, -80.99055881)]  # input user location
     #
     # ############## News #################
     # pSets = dataCollector_News.allPoints
@@ -44,13 +44,13 @@ if __name__ == "__main__":
     # fTypes = dataCollector_Pubmed.allCategories
     # userAddr = [(52.15714851, 4.4852091)]  # input user location
 
-    # ############# Synthetic Data #################
-    # x, y = 0, 0
-    # numRecords = 100
-    # searchRange = 500
-    # cateNum = 10
-    # cateRange = 200
-    # pSets, fTypes = dataGenerator.randomData(numRecords, searchRange, x, y, cateNum, cateRange)
+    ############# Synthetic Data #################
+    x, y = 0, 0
+    numRecords = 100
+    searchRange = 500
+    cateNum = 5
+    cateRange = 10
+    pSets, fTypes = dataGenerator.randomData(numRecords, searchRange, x, y, cateNum, cateRange)
 
     algorithms = [KDNN_Entropy_Greedy, KDNN_Entropy_Hybrid, KDNN_Entropy_Optimal]
     colors = ['r', 'g', 'b']
@@ -76,8 +76,8 @@ if __name__ == "__main__":
     # fig, ax = plt.subplots()
     for i in range(len(algorithms)):
         resultPool = []
-        if i == 2:
-            loops = 10
+        # if i == 2:
+        #     loops = 10
 
         for j in range(loops):
             # select an algorithm for kdnn
