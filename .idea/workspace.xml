@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b990643d-2575-474b-8379-68d8a7dfa0b0" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/kdnn_realData/3_exp.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kdnn_realData/1_exp.py" afterPath="$PROJECT_DIR$/kdnn_realData/1_exp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kdnn_realData/3_exp.py" afterPath="$PROJECT_DIR$/kdnn_realData/3_exp.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kdnn_realData/driver.py" afterPath="$PROJECT_DIR$/kdnn_realData/driver.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,24 +16,56 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="3_exp.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kdnn_realData/3_exp.py">
+      <file leaf-file-name="driver.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kdnn_realData/driver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-78">
-              <caret line="10" column="45" lean-forward="false" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
+            <state relative-caret-position="58">
+              <caret line="60" column="25" lean-forward="false" selection-start-line="60" selection-start-column="25" selection-end-line="60" selection-end-column="25" />
+              <folding>
+                <element signature="e#139#183#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="KDNN_Entropy_Greedy.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/kdnn_realData/KDNN_Entropy_Greedy.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="313">
+              <caret line="168" column="18" lean-forward="false" selection-start-line="168" selection-start-column="18" selection-end-line="168" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="1_exp.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/kdnn_realData/1_exp.py">
+      <file leaf-file-name="KDNN_Entropy_Hybrid.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kdnn_realData/KDNN_Entropy_Hybrid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="514">
-              <caret line="51" column="18" lean-forward="false" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
+            <state relative-caret-position="1920">
+              <caret line="128" column="50" lean-forward="true" selection-start-line="128" selection-start-column="50" selection-end-line="128" selection-end-column="50" />
               <folding>
-                <element signature="e#235#255#0" expanded="true" />
+                <element signature="e#52#98#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="entropyGetWeight.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kdnn_realData/entropyGetWeight.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="28" column="33" lean-forward="true" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="3_expp.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kdnn_realData/3_expp.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -78,22 +110,23 @@
         <option value="$PROJECT_DIR$/experiments/exp_2.py" />
         <option value="$PROJECT_DIR$/experiments/exo_1.py" />
         <option value="$PROJECT_DIR$/experiments/exp_1.py" />
-        <option value="$PROJECT_DIR$/kdnn_realData/driver.py" />
         <option value="$PROJECT_DIR$/kdnn_realData/yelpData/3_exp.py" />
         <option value="$PROJECT_DIR$/kdnn_realData/greedy_max_cover.py" />
         <option value="$PROJECT_DIR$/kdnn_realData/dataCollector_Yelp.py" />
         <option value="$PROJECT_DIR$/kdnn_realData/dataCollector_Pubmed.py" />
         <option value="$PROJECT_DIR$/kdnn_realData/dataCollector_News.py" />
         <option value="$PROJECT_DIR$/kdnn_realData/2_exp.py" />
-        <option value="$PROJECT_DIR$/kdnn_realData/3_exp.py" />
         <option value="$PROJECT_DIR$/kdnn_realData/KDNN_Union_Greedy.py" />
         <option value="$PROJECT_DIR$/kdnn_realData/KDNN_Union_Optimal.py" />
         <option value="$PROJECT_DIR$/entropy.py" />
         <option value="$PROJECT_DIR$/kdnn_realData/entropyGetWeight.py" />
-        <option value="$PROJECT_DIR$/kdnn_realData/KDNN_Entropy_Hybrid.py" />
-        <option value="$PROJECT_DIR$/kdnn_realData/KDNN_Entropy_Greedy.py" />
-        <option value="$PROJECT_DIR$/kdnn_realData/KDNN_Entropy_Optimal.py" />
         <option value="$PROJECT_DIR$/kdnn_realData/1_exp.py" />
+        <option value="$PROJECT_DIR$/kdnn_realData/3_exp.py" />
+        <option value="$PROJECT_DIR$/kdnn_realData/3_expp.py" />
+        <option value="$PROJECT_DIR$/kdnn_realData/driver.py" />
+        <option value="$PROJECT_DIR$/kdnn_realData/KDNN_Entropy_Greedy.py" />
+        <option value="$PROJECT_DIR$/kdnn_realData/KDNN_Entropy_Hybrid.py" />
+        <option value="$PROJECT_DIR$/kdnn_realData/KDNN_Entropy_Optimal.py" />
       </list>
     </option>
   </component>
@@ -173,7 +206,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.1_exp">
+  <component name="RunManager" selected="Python.driver">
     <configuration default="false" name="driver" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -246,7 +279,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="greedy_max_cover" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="3_expp" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -258,7 +291,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="kdNN_with_Entropy" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kdnn_realData/greedy_max_cover.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kdnn_realData/3_expp.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -333,15 +366,15 @@
       <item index="1" class="java.lang.String" itemvalue="Python.1_exp" />
       <item index="2" class="java.lang.String" itemvalue="Python.2_exp" />
       <item index="3" class="java.lang.String" itemvalue="Python.3_exp" />
-      <item index="4" class="java.lang.String" itemvalue="Python.greedy_max_cover" />
+      <item index="4" class="java.lang.String" itemvalue="Python.3_expp" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.1_exp" />
-        <item index="1" class="java.lang.String" itemvalue="Python.driver" />
+        <item index="0" class="java.lang.String" itemvalue="Python.driver" />
+        <item index="1" class="java.lang.String" itemvalue="Python.3_expp" />
         <item index="2" class="java.lang.String" itemvalue="Python.3_exp" />
-        <item index="3" class="java.lang.String" itemvalue="Python.2_exp" />
-        <item index="4" class="java.lang.String" itemvalue="Python.greedy_max_cover" />
+        <item index="3" class="java.lang.String" itemvalue="Python.1_exp" />
+        <item index="4" class="java.lang.String" itemvalue="Python.2_exp" />
       </list>
     </recent_temporary>
   </component>
@@ -363,17 +396,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29725364" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29725364" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46575344" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3561644" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39041096" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.59452057" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4739726" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -397,18 +429,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="64" />
+      <option name="time" value="72" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/knnWithEntropy_Improved.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1335">
-          <caret line="93" column="9" lean-forward="false" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/knnWithEntropy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -584,16 +609,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kdnn_realData/2_exp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1260">
-          <caret line="99" column="59" lean-forward="false" selection-start-line="92" selection-start-column="12" selection-end-line="99" selection-end-column="59" />
-          <folding>
-            <element signature="e#92#136#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kdnn_realData/dataCollector_Yelp.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="810">
@@ -601,30 +616,6 @@
           <folding>
             <element signature="e#51#62#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kdnn_realData/KDNN_Union_Greedy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="30" column="26" lean-forward="false" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kdnn_realData/KDNN_Union_Optimal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="29" column="26" lean-forward="false" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kdnn_realData/driver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-355">
-          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -652,55 +643,97 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kdnn_realData/entropyGetWeight.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="28" column="35" lean-forward="false" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kdnn_realData/KDNN_Entropy_Hybrid.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="29" column="26" lean-forward="true" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
-          <folding>
-            <element signature="e#52#98#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kdnn_realData/KDNN_Entropy_Greedy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="68" column="87" lean-forward="true" selection-start-line="68" selection-start-column="87" selection-end-line="68" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kdnn_realData/KDNN_Entropy_Optimal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="30" column="30" lean-forward="true" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kdnn_realData/3_exp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-78">
-          <caret line="10" column="45" lean-forward="false" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
+        <state relative-caret-position="180">
+          <caret line="12" column="23" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/kdnn_realData/1_exp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="514">
-          <caret line="51" column="18" lean-forward="false" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
+        <state relative-caret-position="199">
+          <caret line="54" column="81" lean-forward="false" selection-start-line="54" selection-start-column="4" selection-end-line="54" selection-end-column="81" />
           <folding>
-            <element signature="e#235#255#0" expanded="true" />
+            <element signature="e#235#255#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kdnn_realData/entropyGetWeight.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="28" column="33" lean-forward="true" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kdnn_realData/2_exp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1080">
+          <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kdnn_realData/KDNN_Entropy_Optimal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="28" column="28" lean-forward="true" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kdnn_realData/KDNN_Entropy_Hybrid.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1920">
+          <caret line="128" column="50" lean-forward="true" selection-start-line="128" selection-start-column="50" selection-end-line="128" selection-end-column="50" />
+          <folding>
+            <element signature="e#52#98#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kdnn_realData/3_expp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kdnn_realData/KDNN_Union_Optimal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="29" column="26" lean-forward="false" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kdnn_realData/KDNN_Union_Greedy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="30" column="26" lean-forward="false" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kdnn_realData/driver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="60" column="25" lean-forward="false" selection-start-line="60" selection-start-column="25" selection-end-line="60" selection-end-column="25" />
+          <folding>
+            <element signature="e#139#183#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kdnn_realData/KDNN_Entropy_Greedy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="168" column="18" lean-forward="false" selection-start-line="168" selection-start-column="18" selection-end-line="168" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -21,7 +21,7 @@ import csv
 
 if __name__ == "__main__":
    kk = 6  # Num of neighbors
-   datasetRange = 50
+   datasetRange = 200
    loops = 10
 
    ############# Synthetic Data #################
