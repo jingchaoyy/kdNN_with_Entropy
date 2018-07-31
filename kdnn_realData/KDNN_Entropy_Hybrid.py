@@ -4,11 +4,13 @@ Created on 5/27/18
 @author: Jingchao Yang
 """
 
-from sklearn.neighbors import NearestNeighbors
-import numpy as np
-from kdnn_realData import entropyGetWeight
 import time
+
+import numpy as np
+from sklearn.neighbors import NearestNeighbors
+
 import entropy
+from toolBox import entropyGetWeight
 
 """ Entropy enabled knn
 Algorithm will compute the diversity/ entropy each time when a new neighbor added

@@ -3,10 +3,9 @@ Created on 6/9/18
 
 @author: Jingchao Yang
 """
-############## data source ##############
-from kdnn_realData import dataCollector_Yelp
-from kdnn_realData import dataCollector_News
-from kdnn_realData import dataCollector_Pubmed
+import csv
+import random
+import time
 
 ############## algorithms ##############
 from kdnn_realData import KDNN_Entropy_Greedy
@@ -14,12 +13,10 @@ from kdnn_realData import KDNN_Entropy_Hybrid
 from kdnn_realData import KDNN_Entropy_Optimal
 from kdnn_realData import KDNN_Union_Greedy
 from kdnn_realData import KDNN_Union_Optimal
-import csv
-
-import time
-import random
-import numpy as np
-import matplotlib.pyplot as plt
+from toolBox import dataCollector_News
+############## data source ##############
+from toolBox import dataCollector_Yelp
+from toolBox import dataCollector_Pubmed
 
 if __name__ == "__main__":
     kk = 6  # Num of neighbors

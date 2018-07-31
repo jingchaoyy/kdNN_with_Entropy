@@ -3,23 +3,19 @@ Created on 6/7/18
 
 @author: Jingchao Yang
 """
-############## data source ##############
-# from kdnn_realData import dataCollector_Yelp
-from kdnn_realData import dataCollector_News
-# from kdnn_realData import dataCollector_Pubmed
-# import dataGenerator
+import time
 
 ############## algorithms ##############
 from kdnn_realData import KDNN_Entropy_Greedy
 from kdnn_realData import KDNN_Entropy_Hybrid
 from kdnn_realData import KDNN_Entropy_Optimal
 from kdnn_realData import KDNN_Union_Greedy
-from kdnn_realData import KDNN_Union_Optimal
+############## data source ##############
+# from toolBox import dataCollector_Yelp
+from toolBox import dataCollector_News
 
-import time
-import random
-import numpy as np
-import matplotlib.pyplot as plt
+# from toolBox import dataCollector_Pubmed
+# import dataGenerator
 
 if __name__ == "__main__":
     tStart = time.time()
@@ -69,7 +65,7 @@ if __name__ == "__main__":
     for i in range(len(algorithms)):
         # select an algorithm for kdnn
         neighbors = algorithms[i].knn(pSets[:datasetRange], fTypes, id,
-                                             kk, ftWW)  # start from p0, collect all 6 nearest restaurant
+                                      kk, ftWW)  # start from p0, collect all 6 nearest restaurant
         print('\n\n######################## Non Dominated #################################')
         for nd in neighbors:
             print('(Nbor, Dist, Div, RT): ', nd)
