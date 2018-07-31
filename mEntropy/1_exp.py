@@ -10,9 +10,9 @@ Created on 6/9/18
 import dataGenerator
 
 ############## algorithms ##############
-from kdnn_realData import KDNN_Entropy_Greedy
-from kdnn_realData import KDNN_Entropy_Hybrid
-from kdnn_realData import KDNN_Entropy_Optimal
+from mEntropy import KDNN_Entropy_Greedy
+from mEntropy import KDNN_Entropy_Hybrid
+from mEntropy import KDNN_Entropy_Optimal
 from kdnn_realData import KDNN_Union_Greedy
 from kdnn_realData import KDNN_Union_Optimal
 
