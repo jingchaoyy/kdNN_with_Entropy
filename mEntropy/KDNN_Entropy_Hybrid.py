@@ -128,7 +128,7 @@ def checkNeighbor(fTs, nbors, kk, wFTs):
     # assign food type to all the neighbors first
     knnT = assignFT(fTs, nbors)
 
-    div = assignWeights(knnT, wFTs, nbors)
+    div = assignWeights.assignWeights(knnT, wFTs, nbors)
 
     # div.sort(reverse=True)
     divSort = sorted(div, key=getKey,
