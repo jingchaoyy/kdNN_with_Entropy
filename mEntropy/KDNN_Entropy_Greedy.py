@@ -31,7 +31,7 @@ def knn(pS, fTs, pid, k, wFTs):
     # looking for knn one by one
     nonDominated = []
     lastNbors = 0  # record the original nbor set for last iteration
-    for i in range(len(pS) + 1):
+    for i in range(len(pS)):
         if i > 0:  # at least two nearest neighbor (i.e. [0] --> user)
             nbrs = NearestNeighbors(n_neighbors=i, algorithm='ball_tree').fit(X)
             # return distances and ranked neighbors (presented as point location in array points)
@@ -54,7 +54,10 @@ def knn(pS, fTs, pid, k, wFTs):
 
             # when more than k neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list
-            if len(neighborsAfter) > k:
+            if len(neighborsAfter) >= k:
+                knnT = assignFT(fTs, tnList)
+                div_local = assignWeights.assignWeights(knnT, wFTs, tnList)
+                print('@@@@@', div_local)
 
                 runTStart = time.time()
                 resultNbor = checkNeighbor(fTs, neighborsAfter, wFTs)
@@ -62,6 +65,13 @@ def knn(pS, fTs, pid, k, wFTs):
                 neighborsAfter = resultNbor[0]  # set of neighbors
                 divAfter = resultNbor[1]  # entropy of the neighbor set
                 runT = runTEnd - runTStart  # get the runtime
+
+                nbor_localDiv = []  # collect local entropy for the selected nbors
+                for nbor in neighborsAfter:
+                    for dl in div_local:
+                        if nbor in dl:
+                            nbor_localDiv.append(dl[0])
+                bestDiv_loc = sum(nbor_localDiv)
 
                 distanceAfter = []
                 for na in neighborsAfter:
@@ -77,7 +87,7 @@ def knn(pS, fTs, pid, k, wFTs):
                 #     # as the latest one, if the same, ignore the latest one
                 #     nonDominated.append((neighborsAfter[:k], maxDist, divAfter, runT))
 
-                nonDominated.append([maxDist, divAfter, runT])  # collect all after each iteration
+                nonDominated.append([maxDist, bestDiv_loc, runT])  # collect all after each iteration
 
 
             else:  # when less than minimum required neighbors found, add to the neighbor list directly
@@ -145,9 +155,6 @@ def checkNeighbor(fTs, nbors, wFTs):
     # assign food type to all the neighbors first
     knnT = assignFT(fTs, nbors)
 
-    div_local = assignWeights.assignWeights(knnT, wFTs, nbors)
-    print('@@@@@', div_local)
-
     # calculating the diversity without the newly added neighbor
     div = []
     for i in range(len(nbors)):
@@ -179,11 +186,4 @@ def checkNeighbor(fTs, nbors, wFTs):
     nbors = nbors[:len(nbors) - bestIndex - 1] + nbors[len(nbors) - bestIndex:len(nbors)]
     print("$$$$$", nbors)
 
-    nbor_localDiv = []  # collect local entropy for the selected nbors
-    for nbor in nbors:
-        for dl in div_local:
-            if nbor in dl:
-                nbor_localDiv.append(dl[0])
-    bestDiv_loc = sum(nbor_localDiv)
-
-    return nbors, bestDiv_loc
+    return nbors, bestDiv
