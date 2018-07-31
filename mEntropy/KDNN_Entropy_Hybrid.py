@@ -7,8 +7,7 @@ Created on 7/31/18
 import time
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
-import entropy
-from toolBox import entropyGetWeight
+from mEntropy import assignWeights
 
 
 def knn(pS, fTs, pid, k, wFTs):
@@ -94,7 +93,7 @@ assigned food types for input point latlon
 def assignFT(fTs, nbors):
     """
     Assign food types to neighbors
-    
+
     :param fTs: foot types list, matched index with nbors
     :param nbors: list of nbors
     :return: list of food types 
@@ -108,7 +107,7 @@ def assignFT(fTs, nbors):
 
 def getKey(item):
     """
-    
+
     :param item: 
     :return: 
     """
@@ -119,7 +118,7 @@ def checkNeighbor(fTs, nbors, kk, wFTs):
     """
     Function defined to gather weight info for each category during entropy calculation, rank each restaurant based on 
     the total weighted entropy, and output k restaurants with highest entropy value
-    
+
     :param fTs: food type list
     :param nbors: neighbor list
     :param kk: kk for k in knn
@@ -129,22 +128,7 @@ def checkNeighbor(fTs, nbors, kk, wFTs):
     # assign food type to all the neighbors first
     knnT = assignFT(fTs, nbors)
 
-    ftList = []
-    for x in knnT:
-        for y in x:
-            ftList.append(y)
-
-    weights = entropyGetWeight.calcShannonEnt(ftList, wFTs)[1]
-
-    div = []  # list for recording total entropy of each neighbor, and related neighbor
-    for i in range(len(knnT)):
-        iEntropy = 0  # for recording the entropy of neighbor i
-        for j in knnT[i]:
-            for k in weights:
-                if j == k[0]:  # assign weight of categories to each category in that neighbor
-                    iEntropy += k[1]
-        div.append((iEntropy, nbors[i]))
-    print("divOriginal", div)
+    div = assignWeights(knnT, wFTs, nbors)
 
     # div.sort(reverse=True)
     divSort = sorted(div, key=getKey,
