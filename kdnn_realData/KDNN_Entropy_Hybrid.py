@@ -82,7 +82,7 @@ def knn(pS, fTs, pid, k, wFTs):
                 #     # as the latest one, if the same, ignore the latest one
                 #     nonDominated.append((neighborsAfter, maxDist, divAfter, runT))
 
-                nonDominated.append([neighborsAfter,maxDist, divAfter, runT])
+                nonDominated.append([maxDist, divAfter, runT])
 
     return nonDominated
 
