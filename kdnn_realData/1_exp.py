@@ -90,14 +90,13 @@ if __name__ == "__main__":
         resultPool = np.array(resultPool)
         resultPool = resultPool.sum(axis=0)  # sum by columns
         avg = resultPool / loops  # all get average
-        print(avg)
 
         X = avg[:, 0]  # Dist
         Y = avg[:, 1]  # Diversity
         Z = avg[:, 2]  # Runtime
 
 
-        with open('/Users/YJccccc/kdNN_with_Entropy/kdnn_realData/results/exp1'+labels[i]+'.csv', 'w', newline='') as csvfile:
+        with open('/Users/YJccccc/kdNN_with_Entropy/kdnn_realData/results/exp1/'+labels[i]+'.csv', 'w', newline='') as csvfile:
             spamwriter = csv.writer(csvfile, delimiter=' ',
                                     quotechar='|', quoting=csv.QUOTE_MINIMAL)
             for r in avg:
