@@ -54,7 +54,7 @@ def knn(pS, fTs, pid, k, wFTs):
 
             # when more than k neighbors found, check if a switch of the last two can improve the diversity,
             # and return the adjusted neighbor list
-            if len(neighborsAfter) >= k:
+            if len(neighborsAfter) > k:
                 knnT = assignFT(fTs, tnList)
                 div_local = assignWeights.assignWeights(knnT, wFTs, tnList)
                 print('@@@@@', div_local)
