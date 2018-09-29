@@ -1,4 +1,15 @@
-import osmnx as ox, networkx as nx, matplotlib.cm as cm, pandas as pd, numpy as np
+"""
+Created on 9/25/18
+
+@author: Xu Teng
+"""
+
+import osmnx as ox
+import networkx as nx
+import matplotlib.cm as cm
+import pandas as pd
+import numpy as np
+
 ox.config(log_file=True, log_console=True, use_cache=True)
 
 query_point = (37.8, -122.4)
@@ -9,6 +20,6 @@ origin_node = ox.get_nearest_node(G, query_point)
 destination_node = ox.get_nearest_node(G, dest_point)
 # find the route between these nodes then plot it
 route = nx.shortest_path_length(G, origin_node, destination_node, weight='length')
-#fig, ax = ox.plot_graph_route(G, route)
-print (route)
-#print origin_node
+# fig, ax = ox.plot_graph_route(G, route)
+print(route)
+# print origin_node
