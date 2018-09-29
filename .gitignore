@@ -1,8 +1,5 @@
 
-kdnn_realData/Data/news.csv
-kdnn_realData/Data/pubmed.csv
-kdnn_realData/Data/*.json
-kdnn_realData/results
+kdnn_realData
 Possible_Result
 paper
 LDA/logs

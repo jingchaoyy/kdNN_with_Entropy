@@ -158,7 +158,11 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="ProjectFrameBounds" fullScreen="true">
+=======
+  <component name="ProjectFrameBounds" extendedState="6">
+>>>>>>> origin/master
     <option name="width" value="1280" />
     <option name="height" value="800" />
   </component>
@@ -230,7 +234,11 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Python.ldaTest">
+=======
+  <component name="RunManager" selected="Python.road">
+>>>>>>> origin/master
     <configuration name="1_exp (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="kdNN_with_Entropy" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -248,9 +256,12 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+<<<<<<< HEAD
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
       <method v="2" />
+=======
+>>>>>>> origin/master
     </configuration>
     <configuration name="1_exp" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="kdNN_with_Entropy" />
@@ -269,11 +280,16 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+<<<<<<< HEAD
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="Dijkstra" type="PythonConfigurationType" factoryName="Python" temporary="true">
+=======
+    </configuration>
+    <configuration name="3_expp" type="PythonConfigurationType" factoryName="Python" temporary="true">
+>>>>>>> origin/master
       <module name="kdNN_with_Entropy" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -281,18 +297,29 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
+<<<<<<< HEAD
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LDA" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LDA/Dijkstra.py" />
+=======
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kdnn_realData" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kdnn_realData/3_expp.py" />
+>>>>>>> origin/master
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+<<<<<<< HEAD
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
       <method v="2" />
+=======
+>>>>>>> origin/master
     </configuration>
     <configuration name="ldaTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="kdNN_with_Entropy" />
@@ -311,9 +338,12 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+<<<<<<< HEAD
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
       <method v="2" />
+=======
+>>>>>>> origin/master
     </configuration>
     <configuration name="road" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="kdNN_with_Entropy" />
@@ -332,9 +362,12 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+<<<<<<< HEAD
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
       <method v="2" />
+=======
+>>>>>>> origin/master
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
       <module name="kdNN_with_Entropy" />
@@ -348,6 +381,7 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;.&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
+<<<<<<< HEAD
       <method v="2" />
     </configuration>
     <list>
@@ -364,6 +398,23 @@
         <item itemvalue="Python.Dijkstra" />
         <item itemvalue="Python.1_exp (1)" />
         <item itemvalue="Python.1_exp" />
+=======
+    </configuration>
+    <list>
+      <item itemvalue="Python.1_exp" />
+      <item itemvalue="Python.3_expp" />
+      <item itemvalue="Python.1_exp (1)" />
+      <item itemvalue="Python.ldaTest" />
+      <item itemvalue="Python.road" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.road" />
+        <item itemvalue="Python.ldaTest" />
+        <item itemvalue="Python.1_exp (1)" />
+        <item itemvalue="Python.1_exp" />
+        <item itemvalue="Python.3_expp" />
+>>>>>>> origin/master
       </list>
     </recent_temporary>
   </component>
