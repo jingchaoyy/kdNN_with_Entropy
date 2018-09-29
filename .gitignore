@@ -5,3 +5,5 @@ kdnn_realData/Data/*.json
 kdnn_realData/results
 Possible_Result
 paper
+LDA/logs
+LDA/cache
